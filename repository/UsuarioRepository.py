@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
 from model.Usuario import Usuario
-from model.Perfil import PerfilUsuario
 from typing import List, Optional
 from datetime import date
 
@@ -46,8 +45,9 @@ class UsuarioRepository:
             return True
         return False
 
-    def obtener_usuario_conPerfil(self, id_usuario: int) -> Optional[Usuario]:
-        """Obtener usuario con su perfil"""
+    def autenticar_usuario(self, nombre_usuario: str, contrasenia: str) -> Optional[Usuario]:
+        """Autenticar usuario por nombre y contraseña"""
         return self.db.query(Usuario).filter(
-            Usuario.id_usuario == id_usuario
-        ).join(PerfilUsuario, isouter=True).first()
+            Usuario.nombre == nombre_usuario,
+            Usuario.contrasenia == contrasenia
+        ).first()
