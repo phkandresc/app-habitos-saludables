@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1032</width>
+    <height>773</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SISTEMA HABITOS SALUDABLES :: Menú Principal</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background-color: rgb(255, 255, 255)
+}
+
+QPushButton#btnRegistrarse{
+	border: none;
+	background-color: transparent;
+	color: black;
+	text-align: center; 
+	padding: 0px; 
+}
+
+QPushButton#btnRegistrarse:hover {
+            text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+QPushButton#btnRegistrarse:pressed {
+            color: gray; /* Optional: Change color on click */
+}
+
+QCheckBox {
+	color:gray;
+}
+QPushButton{
+	background-color: rgb(80, 99, 191);
+	color: rgb(255, 255, 255);
+	border: 2px solid rgb(80, 99, 191);
+	border-radius: 5px;
+	padding: 6px;
+	font-family: &quot;Adwaita Sans&quot;; /* Establece la fuente */
+     /* Establece el tamaño de la fuente */
+}
+
+QLineEdit{
+	border: none;
+	border-bottom: 2px solid rgb(60, 60, 60);
+}
+
+QLineEdit:focus{
+	border-bottom: 2px solid rgb(103, 129, 255);
+}
+
+QPushButton:hover,
+QPushButton:clicked{
+	background-color: rgb(65, 84, 176);
+	border: 2px solid rgb(65, 84, 176);
+}
+
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lbl_titulo_principal">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>391</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt; Hábitos Saludables&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>461</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>iconos/fondoPrincipalV2.jpg</pixmap>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>170</y>
+      <width>391</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1" colspan="2">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Infromación de inicio rápido</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Nivel:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Avance de habitos:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="QLineEdit" name="txt_desafios_Pendientes">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLabel" name="label_5">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Habitos Pendientes:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Desafios Pendientes</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="txt_Ranking">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Usuario:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="2">
+      <widget class="QLineEdit" name="txt_Habitos_Pendientes">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="txt_userName">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="2">
+      <widget class="QProgressBar" name="progressBar_Habitos">
+       <property name="value">
+        <number>24</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>550</y>
+      <width>221</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Adwaita Sans</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Crear un nuevo habito</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1032</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="action_item_Habitos_Saludables"/>
+    <addaction name="actionLogros"/>
+    <addaction name="actionRanking"/>
+    <addaction name="actionDesaf_os"/>
+    <addaction name="actionComunidad"/>
+    <addaction name="actionPerfil_Usuario"/>
+    <addaction name="actionCerrar_Sesion"/>
+   </widget>
+   <addaction name="menuMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_Icono_Habitos_Saludables"/>
+   <addaction name="action_Icono_Logros"/>
+   <addaction name="action_Icono_Ranking"/>
+   <addaction name="action_Icono_Comunidad"/>
+   <addaction name="action_Icono_Perfil_Usuario"/>
+   <addaction name="action_Icono_Cerrar_Sesion"/>
+  </widget>
+  <action name="action_Icono_Habitos_Saludables">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="Habitos_Saludables">
+     <normaloff>iconos/Habitos_Salud.png</normaloff>iconos/Habitos_Salud.png</iconset>
+   </property>
+   <property name="text">
+    <string>Habitos Saludables</string>
+   </property>
+  </action>
+  <action name="action_Icono_Logros">
+   <property name="icon">
+    <iconset theme="Logros">
+     <normaloff>iconos/logros-hábitos.png</normaloff>iconos/logros-hábitos.png</iconset>
+   </property>
+   <property name="text">
+    <string>Logros</string>
+   </property>
+  </action>
+  <action name="action_Icono_Ranking">
+   <property name="icon">
+    <iconset theme="Ranking">
+     <normaloff>iconos/icons8-goals.png</normaloff>iconos/icons8-goals.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ranking</string>
+   </property>
+  </action>
+  <action name="action_Icono_Comunidad">
+   <property name="icon">
+    <iconset theme="Comunidad">
+     <normaloff>iconos/icons8-comunidad.png</normaloff>iconos/icons8-comunidad.png</iconset>
+   </property>
+   <property name="text">
+    <string>Comunidad</string>
+   </property>
+  </action>
+  <action name="action_Icono_Perfil_Usuario">
+   <property name="icon">
+    <iconset>
+     <normaloff>iconos/usuarios.png</normaloff>iconos/usuarios.png</iconset>
+   </property>
+   <property name="text">
+    <string>Perfil</string>
+   </property>
+   <property name="toolTip">
+    <string>Perfil_Usuario</string>
+   </property>
+  </action>
+  <action name="action_Icono_Cerrar_Sesion">
+   <property name="icon">
+    <iconset theme="Cerrar_Sesion">
+     <normaloff>iconos/icons-salir.png</normaloff>iconos/icons-salir.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cerrar Sesion</string>
+   </property>
+  </action>
+  <action name="action_item_Habitos_Saludables">
+   <property name="text">
+    <string>Habitos_Saludables</string>
+   </property>
+  </action>
+  <action name="actionLogros">
+   <property name="text">
+    <string>Logros</string>
+   </property>
+  </action>
+  <action name="actionRanking">
+   <property name="text">
+    <string>Ranking</string>
+   </property>
+  </action>
+  <action name="actionDesaf_os">
+   <property name="text">
+    <string>Desafíos</string>
+   </property>
+  </action>
+  <action name="actionComunidad">
+   <property name="text">
+    <string>Comunidad</string>
+   </property>
+  </action>
+  <action name="actionPerfil_Usuario">
+   <property name="text">
+    <string>Perfil_Usuario</string>
+   </property>
+  </action>
+  <action name="actionCerrar_Sesion">
+   <property name="text">
+    <string>Cerrar_Sesion</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
