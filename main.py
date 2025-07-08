@@ -1,11 +1,11 @@
-"""if __name__ == '__main__':
-    print("Hello, World!")"""
 import sys
-from PyQt6 import QtWidgets
-from controller.UsuarioController import UsuarioController
+from PyQt6.QtWidgets import QApplication
+from controller.LoginController import LoginController
 
-app = QtWidgets.QApplication(sys.argv)
-myApp = UsuarioController()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
 
-myApp.show()
-app.exec()
+    controller = LoginController()
+    controller.vista.show()
+
+    sys.exit(app.exec())
