@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>512</width>
+    <height>556</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background-color: rgb(255, 255, 255)
+}
+
+QPushButton#btnRegistrarse{
+	border: none;
+	background-color: transparent;
+	color: black;
+	text-align: center; 
+	padding: 0px; 
+}
+
+QPushButton#btnRegistrarse:hover {
+            text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+QPushButton#btnRegistrarse:pressed {
+            color: gray; /* Optional: Change color on click */
+}
+
+QCheckBox {
+	color:gray;
+}
+QPushButton{
+	background-color: rgb(80, 99, 191);
+	color: rgb(255, 255, 255);
+	border: 2px solid rgb(80, 99, 191);
+	border-radius: 5px;
+	padding: 6px;
+	font-family: &quot;Adwaita Sans&quot;; /* Establece la fuente */
+     /* Establece el tamaño de la fuente */
+}
+
+QLineEdit{
+	border: none;
+	border-bottom: 2px solid rgb(60, 60, 60);
+}
+
+QLineEdit:focus{
+	border-bottom: 2px solid rgb(103, 129, 255);
+}
+
+QPushButton:hover,
+QPushButton:clicked{
+	background-color: rgb(65, 84, 176);
+	border: 2px solid rgb(65, 84, 176);
+}</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>481</width>
+     <height>548</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="5" column="1">
+     <widget class="QComboBox" name="cbxCategorias">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Creador:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>NUEVA COMUNIDAD</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Nombre:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="txtNombre">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QPushButton" name="btnRegresar">
+      <property name="font">
+       <font>
+        <family>Adwaita Sans</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Regresar</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>iconos/icons8-comunidad.png</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QPushButton" name="btnCrear">
+      <property name="font">
+       <font>
+        <family>Adwaita Sans</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Crear</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLabel" name="label_4">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Categorias:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QPushButton" name="btnCancelar">
+      <property name="font">
+       <font>
+        <family>Adwaita Sans</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Cancelar</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

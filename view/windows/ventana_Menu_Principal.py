@@ -179,7 +179,6 @@ class Ui_MainWindow(object):
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.ToolBarArea.LeftToolBarArea, self.toolBar)
         self.action_Icono_Habitos_Saludables = QtGui.QAction(parent=MainWindow)
-        self.action_Icono_Habitos_Saludables.setCheckable(True)
         icon = QtGui.QIcon.fromTheme("Habitos_Saludables")
         self.action_Icono_Habitos_Saludables.setIcon(icon)
         self.action_Icono_Habitos_Saludables.setObjectName("action_Icono_Habitos_Saludables")
