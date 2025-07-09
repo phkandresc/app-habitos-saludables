@@ -8,6 +8,8 @@ from model.Usuario import Usuario
 from repository.UsuarioRepository import UsuarioRepository
 from view.windows.LoginView import Ui_Login
 from db.connection import get_db_session
+from controller.menu_principal_Controller import menu_principal_Controller
+from controller.Usuario_Register_Controller import UsuarioRegisterController
 
 class LoginController:
     def __init__(self):
@@ -30,6 +32,7 @@ class LoginController:
         self.ui.cbxMostrarPassword.toggled.connect(self.toggle_password_echo_mode)
         # Accion al presionar la tecla Enter en el campo de contraseña
         self.ui.txtPassword.returnPressed.connect(self.iniciar_sesion)
+        self.ui.btnRegistrarse.clicked.connect(self.registrarse)
 
 
     def toggle_password_echo_mode(self, checked):
@@ -56,6 +59,9 @@ class LoginController:
 
             if usuario:
                 print(f"Usuario {usuario.nombre} ha iniciado sesión correctamente")
+                self.vista.close()
+                self.menu_controller = menu_principal_Controller()
+                self.menu_controller.vista.show()
                 return usuario
             else:
                 self.mostrar_error("Usuario o contraseña incorrectos")
@@ -78,3 +84,8 @@ class LoginController:
         """Cierra la sesión de la base de datos"""
         if self.db_session:
             self.db_session.close()
+
+    def registrarse(self):
+        self.vista.close()
+        self.registro_usuario = UsuarioRegisterController()
+        self.registro_usuario.vista.show()

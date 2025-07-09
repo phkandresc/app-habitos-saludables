@@ -6,7 +6,6 @@ from repository.HabitosRepository import HabitosRepository
 from view.windows.ventana_nuevo_habito import Ui_Form
 from model.Habitos import Habitos
 from model.Categorias import Categoria
-
 class registro_habitos:
     def __init__(self, parent_controller=None):
         self.vista = QMainWindow()
@@ -18,6 +17,9 @@ class registro_habitos:
         self.cargar_categorias()
         self.conectar_eventos()
 
+    def cargar_categorias_cmb(self):
+        categorias = ["Gimnasio y Fuerza","Mindfulness y Relajación", "Cardio y Resistencia", "Baile y Movimiento", "Deportes al Aire Libre","Pérdida de peso"]
+        self.ui.cbxCategorias.addItems(categorias)
     def cargar_categorias(self):
         try:
             categorias = self.db_session.query(Categoria.nombre).order_by(Categoria.nombre).all()
@@ -103,6 +105,7 @@ class registro_habitos:
             # Guardar en la base de datos
             self.habitos_repository.crear_habito(nuevo_habito)
             QMessageBox.information(self.vista, "Éxito", "Habito registrado exitosamente.")
+            self.cargar_categorias()
             self.limpiar_campos()
 
         except Exception as e:
