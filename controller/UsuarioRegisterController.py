@@ -1,14 +1,11 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox
-from model.Usuario import Usuario
 from repository.UsuarioRepository import UsuarioRepository
-from db.connection import get_db_session
 from view.windows.RegistroView import Ui_Form
 
 class UsuarioRegisterController:
     def __init__(self):
-        self.db_session = get_db_session()
-        self.usuario_repository = UsuarioRepository(self.db_session)
+        self.usuario_repository = UsuarioRepository()
         self.vista = QtWidgets.QWidget()
         self.ui = Ui_Form()
         self.ui.setupUi(self.vista)
@@ -24,18 +21,16 @@ class UsuarioRegisterController:
         # Obtiene los datos ingresados por el usuario
         nombre = self.ui.txtNombre.text().strip()
         apellido = self.ui.txtUsuario.text().strip()  # Cambia esto si el campo no es el apellido
-        correo = self.ui.txtCorreo.text().strip()
+        direccion = self.ui.txtCorreo.text().strip()  # Asumiendo que txtCorreo es dirección
         contrasenia = self.ui.txtContrasenia.text().strip()
         confirmar_contrasenia = self.ui.txtConfirmarContrasenia.text().strip()
         fecha_nacimiento = self.ui.txtFechaNacimiento.date().toPyDate()
-        sexo = 'Hombre' if self.ui.rbtnHombre.isChecked() else 'Mujer'
-        ocupacion = self.ui.txtOcupacion.text().strip()
-        peso = self.ui.txtPeso.text().strip()
-        altura = self.ui.txtAltura.text().strip()
+        sexo = 'H' if self.ui.rbtnHombre.isChecked() else 'M'  # Ajustado a 2 caracteres según el modelo
+        nombre_usuario = self.ui.txtOcupacion.text().strip()  # Asumiendo que txtOcupacion es nombre_usuario
 
         try:
             # Validar campos vacíos
-            if not all([nombre, apellido, correo, contrasenia, confirmar_contrasenia, ocupacion, peso, altura]):
+            if not all([nombre, apellido, direccion, contrasenia, confirmar_contrasenia, nombre_usuario]):
                 self.mostrar_error("Todos los campos son obligatorios")
                 return
 
@@ -44,23 +39,24 @@ class UsuarioRegisterController:
                 self.mostrar_error("Las contraseñas no coinciden")
                 return
 
-            # Crear una nueva instancia de Usuario
-            nuevo_usuario = Usuario(
-                nombre=nombre,
-                apellido=apellido,
-                correo = correo,
-                contrasenia=contrasenia,
-                fecha_nacimiento=fecha_nacimiento,
-                sexo=sexo,
-                ocupacion=ocupacion,
-                peso=peso,
-                altura=altura
-            )
+            # Crear diccionario con los datos del usuario
+            usuario_data = {
+                'nombre': nombre,
+                'apellido': apellido,
+                'direccion': direccion,
+                'contrasenia': contrasenia,
+                'fecha_nacimiento': fecha_nacimiento,
+                'sexo': sexo,
+                'nombre_usuario': nombre_usuario
+            }
 
             # Guardar en la base de datos
-            self.usuario_repository.crear_usuario(nuevo_usuario)
-            QMessageBox.information(self.vista, "Éxito", "Usuario registrado exitosamente.")
-            self.limpiar_campos()
+            nuevo_usuario = self.usuario_repository.crear_usuario(usuario_data)
+            if nuevo_usuario:
+                QMessageBox.information(self.vista, "Éxito", "Usuario registrado exitosamente.")
+                self.limpiar_campos()
+            else:
+                self.mostrar_error("Error al registrar usuario en la base de datos")
 
         except Exception as e:
             self.mostrar_error(f"Error al registrar usuario: {str(e)}")
@@ -81,8 +77,7 @@ class UsuarioRegisterController:
         self.ui.txtConfirmarContrasenia.clear()
         self.ui.txtFechaNacimiento.clear()
         self.ui.txtOcupacion.clear()
-        self.ui.txtPeso.clear()
-        self.ui.txtAltura.clear()
+        # Removidos los campos que no existen en el modelo Usuario
         self.ui.rbtnHombre.setChecked(False)
         self.ui.rbtnMujer.setChecked(False)
 
@@ -92,5 +87,5 @@ class UsuarioRegisterController:
 
     def cerrar_sesion(self):
         """Cierra la sesión de la base de datos"""
-        if self.db_session:
-            self.db_session.close()
+        # El DatabaseConnection maneja las sesiones automáticamente
+        pass

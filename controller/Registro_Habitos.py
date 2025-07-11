@@ -1,7 +1,7 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from datetime import datetime
-from db.connection import get_db_session
+from db.Connection import get_db_session
 from repository.HabitosRepository import HabitosRepository
 from view.windows.ventana_nuevo_habito import Ui_Form
 from model.Habitos import Habitos

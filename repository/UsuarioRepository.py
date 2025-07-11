@@ -1,53 +1,130 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
+from db.Connection import DatabaseConnection
 from model.Usuario import Usuario
 from typing import List, Optional
-from datetime import date
 
 
 class UsuarioRepository:
     """Repositorio para operaciones de base de datos de Usuario"""
 
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self):
+        self.db = DatabaseConnection()
 
-    def crear_usuario(self, usuario_data: dict) -> Usuario:
+    def crear_usuario(self, usuario_data: dict) -> Optional[Usuario]:
         """Crear usuario en BD"""
-        usuario = Usuario(**usuario_data)
-        self.db.add(usuario)
-        self.db.commit()
-        self.db.refresh(usuario)
-        return usuario
+        try:
+            with self.db.get_session() as session:
+                usuario = Usuario(**usuario_data)
+                session.add(usuario)
+                session.flush()  # Para obtener el ID antes del commit
+                # Hacer que el objeto sea independiente de la sesión
+                session.expunge(usuario)
+                # El commit es automático por el context manager
+                return usuario
 
-    def obtener_usuarioPorID(self, id_usuario: int) -> Optional[Usuario]:
+        except SQLAlchemyError as e:
+            print(f"Error creando usuario: {e}")
+            return None
+
+    def obtener_usuario_por_id(self, id_usuario: int) -> Optional[Usuario]:
         """Obtener usuario por ID"""
-        return self.db.query(Usuario).filter(Usuario.id_usuario == id_usuario).first()
+        try:
+            with self.db.get_session() as session:
+                usuario = session.query(Usuario).filter(
+                    Usuario.id_usuario == id_usuario
+                ).first()
+
+                if usuario:
+                    # Hacer que el objeto sea independiente de la sesión
+                    session.expunge(usuario)
+                    return usuario
+                return None
+        except SQLAlchemyError as e:
+            print(f"Error obteniendo usuario: {e}")
+            return None
 
     def obtener_todos_usuarios(self) -> List[Usuario]:
         """Obtener todos los usuarios"""
-        return self.db.query(Usuario).all()
+        try:
+            with self.db.get_session() as session:
+                return session.query(Usuario).all()
+        except SQLAlchemyError as e:
+            print(f"Error obteniendo usuarios: {e}")
+            return []
 
     def actualizar_usuario(self, id_usuario: int, usuario_data: dict) -> Optional[Usuario]:
         """Actualizar usuario"""
-        usuario = self.get_by_id(id_usuario)
-        if usuario:
-            for key, value in usuario_data.items():
-                setattr(usuario, key, value)
-            self.db.commit()
-            self.db.refresh(usuario)
-        return usuario
+        try:
+            with self.db.get_session() as session:
+                usuario = session.query(Usuario).filter(
+                    Usuario.id_usuario == id_usuario
+                ).first()
+
+                if usuario:
+                    for key, value in usuario_data.items():
+                        if hasattr(usuario, key):
+                            setattr(usuario, key, value)
+
+                    session.flush()
+                    return usuario
+                return None
+
+        except SQLAlchemyError as e:
+            print(f"Error actualizando usuario: {e}")
+            return None
 
     def eliminar_usuario(self, id_usuario: int) -> bool:
         """Eliminar usuario"""
-        usuario = self.get_by_id(id_usuario)
-        if usuario:
-            self.db.delete(usuario)
-            self.db.commit()
-            return True
-        return False
+        try:
+            with self.db.get_session() as session:
+                usuario = session.query(Usuario).filter(
+                    Usuario.id_usuario == id_usuario
+                ).first()
+
+                if usuario:
+                    session.delete(usuario)
+                    return True
+                return False
+
+        except SQLAlchemyError as e:
+            print(f"Error eliminando usuario: {e}")
+            return False
 
     def autenticar_usuario(self, nombre_usuario: str, contrasenia: str) -> Optional[Usuario]:
         """Autenticar usuario por nombre y contraseña"""
-        return self.db.query(Usuario).filter(
-            Usuario.nombre == nombre_usuario,
-            Usuario.contrasenia == contrasenia
-        ).first()
+        try:
+            with self.db.get_session() as session:
+                usuario = session.query(Usuario).filter(
+                    Usuario.nombre_usuario == nombre_usuario,
+                    Usuario.contrasenia == contrasenia
+                ).first()
+
+                if usuario:
+                    # Hacer que el objeto sea independiente de la sesión
+                    session.expunge(usuario)
+                    return usuario
+                return None
+
+        except SQLAlchemyError as e:
+            print(f"Error autenticando usuario: {e}")
+            return None
+
+    def usuario_existe(self, nombre_usuario: str = None, email: str = None) -> bool:
+        """Verificar si un usuario existe por nombre o email"""
+        try:
+            with self.db.get_session() as session:
+                query = session.query(Usuario)
+
+                if nombre_usuario:
+                    query = query.filter(Usuario.nombre == nombre_usuario)
+                elif email:
+                    query = query.filter(Usuario.email == email)
+                else:
+                    return False
+
+                return query.first() is not None
+
+        except SQLAlchemyError as e:
+            print(f"Error verificando usuario: {e}")
+            return False
