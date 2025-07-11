@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from controller.Registro_Habitos_Controler import registro_habitos
 from controller.Registro_Comunidad_Controller import nueva_comunidad
 from view.windows.ventana_Menu_Principal import Ui_MainWindow
-
+from controller.Perfil_Usuario_Controller import perfil_usuario
 class menu_principal_Controller:
     def __init__(self):
         self.vista = QMainWindow()
@@ -16,6 +16,7 @@ class menu_principal_Controller:
         self.ui.actionCerrar_Sesion.triggered.connect(self.cerrar_aplicacion)
         self.ui.action_Icono_Cerrar_Sesion.triggered.connect(self.cerrar_aplicacion)
         self.ui.action_Icono_Comunidad.triggered.connect(self.comunidad)
+        self.ui.action_Icono_Perfil_Usuario.triggered.connect(self.perfil_Usuario)
 
         self.ui.pushButton.clicked.connect(self.nuevo_habito)
 
@@ -32,3 +33,8 @@ class menu_principal_Controller:
         self.vista.close()
         self.ingresar_comunidad = nueva_comunidad(self)
         self.ingresar_comunidad.vista.show()
+
+    def perfil_Usuario(self):
+        self.vista.close()
+        self.perfil_usuarios = perfil_usuario(self)
+        self.perfil_usuarios.vista.show()
