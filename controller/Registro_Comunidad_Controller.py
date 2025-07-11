@@ -25,6 +25,7 @@ class nueva_comunidad:
     def conectar_eventos(self):
         self.ui.btnCancelar.clicked.connect(self.limpiar_campos)
         self.ui.btnRegresar.clicked.connect(self.regresar)
+        self.ui.btnCrear.clicked.connect(self.agregar_comunidad)
 
     def limpiar_campos(self):
         self.ui.txtNombre.setText("")
@@ -54,7 +55,8 @@ class nueva_comunidad:
             nuevo_comunidad = Comunidad(
                 nombre=nombre,
                 creador=creador,
-                categorias = self.obtener_id_categoria(categoriasN)
+                categorias = categoriasN
+                #categorias = self.obtener_id_categoria(categoriasN)
             )
             # Guardar en la base de datos
             self.comunidad_repository.crear_comuniadad(nuevo_comunidad)

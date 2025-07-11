@@ -15,15 +15,14 @@ class registro_habitos:
         self.db_session = get_db_session()
         self.habitos_repository = HabitosRepository(self.db_session)
         self.cargar_categorias()
+        #self.cargar_categorias_cmb()
         self.conectar_eventos()
 
-    def cargar_categorias_cmb(self):
-        categorias = ["Gimnasio y Fuerza","Mindfulness y Relajación", "Cardio y Resistencia", "Baile y Movimiento", "Deportes al Aire Libre","Pérdida de peso"]
-        self.ui.cbxCategorias.addItems(categorias)
+
     def cargar_categorias(self):
         try:
-            categorias = self.db_session.query(Categoria.nombre).order_by(Categoria.nombre).all()
-            nombres = [cat[0] for cat in categorias] if categorias else [
+            # Categorías que deberían existir
+            categorias_base = [
                 "Planificar comidas balanceadas.",
                 "Actividad Física",
                 "Beber suficiente agua",
@@ -31,11 +30,29 @@ class registro_habitos:
                 "Comer proteínas magras",
                 "Sueño Reparador"
             ]
+
+            # Obtener las ya existentes
+            existentes = self.db_session.query(Categoria.nombre).all()
+            existentes_nombres = set(cat[0] for cat in existentes)
+
+            # Insertar las que faltan
+            for nombre in categorias_base:
+                if nombre not in existentes_nombres:
+                    nueva_categoria = Categoria(nombre=nombre)
+                    self.db_session.add(nueva_categoria)
+
+            self.db_session.commit()  # Guardar nuevas si hubo
+
+            # Recargar categorías actualizadas desde la BD
+            categorias = self.db_session.query(Categoria.nombre).order_by(Categoria.nombre).all()
+            print("[DEBUG] Categorías encontradas en BD:", categorias)
+
+            nombres = [cat[0] for cat in categorias]
             self.ui.cmbCategoria.clear()
             self.ui.cmbCategoria.addItems(nombres)
+
         except Exception as e:
             self.mostrar_error(f"Error al cargar categorías: {str(e)}")
-
 
     def conectar_eventos(self):
         self.ui.btnCancelar.clicked.connect(self.limpiar_campos)
@@ -49,6 +66,7 @@ class registro_habitos:
             self.ui.checkJueves, self.ui.checkViernes, self.ui.checkSabado,
             self.ui.checkDomingo
         ]:
+            self.cargar_categorias()
             checkbox.setChecked(False)
 
         # Opcional: Reiniciar la categoría al primer ítem

@@ -8,9 +8,8 @@ class ComunidadRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def crear_comuniadad(self, comuniadad_data: dict) -> Comunidad:
+    def crear_comuniadad(self, comuniadad: Comunidad) -> Comunidad:
         """Crear comuniadad en BD"""
-        comuniadad = Comunidad(**comuniadad_data)
         self.db.add(comuniadad)
         self.db.commit()
         self.db.refresh(comuniadad)

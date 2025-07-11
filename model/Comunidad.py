@@ -5,7 +5,7 @@ class Comunidad(Base):
     __tablename__ = 'comunidad'
 
     id_comunidad = Column(Integer, primary_key=True)
-    nombre = Column(String, nullable=False)
-    creador = Column(String, nullable=False)
-    categorias = Column(String, nullable=False)
+    nombre = Column(String(50), nullable=False)
+    creador = Column(String(50), nullable=False)
+    categorias = Column(String(30), nullable=False)
 
