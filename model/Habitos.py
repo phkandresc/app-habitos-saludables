@@ -11,6 +11,9 @@ class Habitos(Base):
     categoria = Column(String(100), nullable=False)
     fecha_creacion = Column(Date, nullable=False)
     id_categoria = Column(Integer, ForeignKey('categorias.id_categoria'))
+    id_usuario = Column(Integer, ForeignKey('usuarios.id_usuario'))  # Añadido para relación con usuario
 
-    # Relación con Categoria
-    categorias = relationship("Categoria", backref="habitos")
+    # Relaciones
+    categoria_rel = relationship("Categoria", back_populates="habitos")
+    usuario = relationship("Usuario", back_populates="habitos")
+    seguimientos = relationship("SeguimientoDiario", back_populates="habito")

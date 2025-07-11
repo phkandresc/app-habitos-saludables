@@ -1,23 +1,35 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox
+from PyQt6.uic.properties import QtCore
+
 from model.Usuario import Usuario
 from repository.UsuarioRepository import UsuarioRepository
 from db.connection import get_db_session
 from view.windows.RegistroView import Ui_Form
 
 class UsuarioRegisterController:
-    def __init__(self):
+    def __init__(self, parent_controller=None):
         self.db_session = get_db_session()
         self.usuario_repository = UsuarioRepository(self.db_session)
         self.vista = QtWidgets.QWidget()
         self.ui = Ui_Form()
+        self.parent_controller = parent_controller  # Guardamos la referencia
         self.ui.setupUi(self.vista)
+        # Configurar el evento de cierre
+        #self.vista.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose, False)
+        #self.vista.closeEvent = self.closeEvent  # Sobrescribir el evento de cierre
         self.conectar_eventos()
+
 
     def conectar_eventos(self):
         """Conecta los eventos de la interfaz con sus métodos"""
         self.ui.btnRegistrar.clicked.connect(self.registrar_usuario)
         self.ui.btnCancelar.clicked.connect(self.cancelar_registro)
+
+    def closeEvent(self, event):
+        """Maneja el evento de cierre de la ventana"""
+        self.cancelar_registro()
+        event.accept()
 
     def registrar_usuario(self):
         """Maneja el proceso de registro de usuario"""
@@ -89,6 +101,8 @@ class UsuarioRegisterController:
     def cancelar_registro(self):
         """Cierra la ventana de registro"""
         self.vista.close()
+        if self.parent_controller:  # Si tenemos referencia al padre
+            self.parent_controller.vista.show()  # Mostramos su vista directamente
 
     def cerrar_sesion(self):
         """Cierra la sesión de la base de datos"""

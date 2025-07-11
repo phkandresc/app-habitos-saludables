@@ -1,4 +1,4 @@
-from sqlalchemy import (Column, Integer, String, Date)
+from sqlalchemy import (Column, Integer, String, Date, ForeignKey)
 from sqlalchemy.orm import relationship
 from .base import Base
 
@@ -13,6 +13,17 @@ class Usuario(Base):
     contrasenia = Column(String, nullable=False)
     fecha_nacimiento = Column(Date, nullable=False)
     sexo = Column(String, nullable=False)
+    nombre_usuario = Column(String(50), unique=True, nullable=False)
+    #id_per_usuario = Column(Integer, ForeignKey('perfil_usuario.id_usuario'))
+
+    # Relaciones
+    perfil = relationship("Perfil_Usuario", back_populates="usuario", uselist=False)
+    habitos = relationship("Habito", back_populates="usuario")
+    comunidades = relationship("Comunidad", secondary="incorpora_comunidad", back_populates="usuarios")
+    niveles = relationship("Nivel", secondary="asignacion_nivel", back_populates="usuarios")
+    logros = relationship("Logro", secondary="desbloquea", back_populates="usuarios")
+    rankings = relationship("Ranking", secondary="posee_ranking", back_populates="usuarios")
+    seguimientos = relationship("SeguimientoDiario", back_populates="usuario")
 
     # Relaciones
     #perfil = relationship("PerfilUsuario", back_populates="usuario", uselist=False)

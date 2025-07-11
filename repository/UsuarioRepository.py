@@ -1,7 +1,9 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from model.Usuario import Usuario
+from model.Perfil_Usuario import Perfil_Usuario
 from typing import List, Optional
 from datetime import date
+from db.connection import get_db_session
 
 
 class UsuarioRepository:
@@ -47,7 +49,23 @@ class UsuarioRepository:
 
     def autenticar_usuario(self, nombre_usuario: str, contrasenia: str) -> Optional[Usuario]:
         """Autenticar usuario por nombre y contraseña"""
-        return self.db.query(Usuario).filter(
+        try:
+            usuario = self.db.query(Usuario) \
+                .options(joinedload(Usuario.perfil)) \
+                .filter(
+                Usuario.nombre_usuario == nombre_usuario,
+                Usuario.contrasenia == contrasenia
+            ).first()
+            return usuario
+        except Exception as e:
+            print(f"Error al autenticar usuario: {e}")
+            return None
+
+
+
+
+
+        """return self.db.query(Usuario).filter(
             Usuario.nombre == nombre_usuario,
             Usuario.contrasenia == contrasenia
-        ).first()
+        ).first()"""

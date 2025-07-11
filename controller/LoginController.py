@@ -5,6 +5,7 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 
 from model.Usuario import Usuario
+from model.Perfil_Usuario import Perfil_Usuario
 from repository.UsuarioRepository import UsuarioRepository
 from view.windows.LoginView import Ui_Login
 from db.connection import get_db_session
@@ -60,7 +61,7 @@ class LoginController:
             if usuario:
                 print(f"Usuario {usuario.nombre} ha iniciado sesión correctamente")
                 self.vista.close()
-                self.menu_controller = menu_principal_Controller()
+                self.menu_controller = menu_principal_Controller(usuario)
                 self.menu_controller.vista.show()
                 return usuario
             else:
@@ -87,5 +88,5 @@ class LoginController:
 
     def registrarse(self):
         self.vista.close()
-        self.registro_usuario = UsuarioRegisterController()
+        self.registro_usuario = UsuarioRegisterController(self)
         self.registro_usuario.vista.show()

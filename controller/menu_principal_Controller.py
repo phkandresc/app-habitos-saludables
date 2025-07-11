@@ -6,7 +6,8 @@ from controller.Registro_Comunidad_Controller import nueva_comunidad
 from view.windows.ventana_Menu_Principal import Ui_MainWindow
 from controller.Perfil_Usuario_Controller import perfil_usuario
 class menu_principal_Controller:
-    def __init__(self):
+    def __init__(self, usuario_autenticado=None):
+        self.usuario_autenticado = usuario_autenticado
         self.vista = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.vista)
@@ -34,7 +35,7 @@ class menu_principal_Controller:
         self.ingresar_comunidad = nueva_comunidad(self)
         self.ingresar_comunidad.vista.show()
 
-    def perfil_Usuario(self):
+    def perfil_Usuario(self): # Para igresar a la ventana perfil usuario
         self.vista.close()
-        self.perfil_usuarios = perfil_usuario(self)
+        self.perfil_usuarios = perfil_usuario(self,self.usuario_autenticado)
         self.perfil_usuarios.vista.show()
