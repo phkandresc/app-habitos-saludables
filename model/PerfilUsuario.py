@@ -1,7 +1,7 @@
 # model/PerfilUsuario.py
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import relationship
-from db.Connection import Base
+from model.Base import Base
 
 
 class PerfilUsuario(Base):

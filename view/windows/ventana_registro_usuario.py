@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'ventana_registro_usuario.ui'
+# Form implementation generated from reading ui file 'RegistroUsuario.ui'
 #
 # Created by: PyQt6 UI code generator 6.9.0
 #

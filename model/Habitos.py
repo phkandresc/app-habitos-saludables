@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
-from .Base import Base
+from model.Base import Base
 
 
 class Habitos(Base):

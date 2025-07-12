@@ -4,7 +4,6 @@ from db.Connection import DatabaseConnection
 from model.Usuario import Usuario
 from typing import List, Optional
 
-
 class UsuarioRepository:
     """Repositorio para operaciones de base de datos de Usuario"""
 
@@ -18,11 +17,8 @@ class UsuarioRepository:
                 usuario = Usuario(**usuario_data)
                 session.add(usuario)
                 session.flush()  # Para obtener el ID antes del commit
-                # Hacer que el objeto sea independiente de la sesión
                 session.expunge(usuario)
-                # El commit es automático por el context manager
                 return usuario
-
         except SQLAlchemyError as e:
             print(f"Error creando usuario: {e}")
             return None
@@ -34,9 +30,7 @@ class UsuarioRepository:
                 usuario = session.query(Usuario).filter(
                     Usuario.id_usuario == id_usuario
                 ).first()
-
                 if usuario:
-                    # Hacer que el objeto sea independiente de la sesión
                     session.expunge(usuario)
                     return usuario
                 return None
@@ -60,16 +54,13 @@ class UsuarioRepository:
                 usuario = session.query(Usuario).filter(
                     Usuario.id_usuario == id_usuario
                 ).first()
-
                 if usuario:
                     for key, value in usuario_data.items():
                         if hasattr(usuario, key):
                             setattr(usuario, key, value)
-
                     session.flush()
                     return usuario
                 return None
-
         except SQLAlchemyError as e:
             print(f"Error actualizando usuario: {e}")
             return None
@@ -81,12 +72,10 @@ class UsuarioRepository:
                 usuario = session.query(Usuario).filter(
                     Usuario.id_usuario == id_usuario
                 ).first()
-
                 if usuario:
                     session.delete(usuario)
                     return True
                 return False
-
         except SQLAlchemyError as e:
             print(f"Error eliminando usuario: {e}")
             return False
@@ -99,32 +88,26 @@ class UsuarioRepository:
                     Usuario.nombre_usuario == nombre_usuario,
                     Usuario.contrasenia == contrasenia
                 ).first()
-
                 if usuario:
-                    # Hacer que el objeto sea independiente de la sesión
                     session.expunge(usuario)
                     return usuario
                 return None
-
         except SQLAlchemyError as e:
             print(f"Error autenticando usuario: {e}")
             return None
 
-    def usuario_existe(self, nombre_usuario: str = None, email: str = None) -> bool:
-        """Verificar si un usuario existe por nombre o email"""
+    def usuario_existe(self, nombre_usuario: str = None, correo_electronico: str = None) -> bool:
+        """Verificar si un usuario existe por nombre de usuario o correo electrónico"""
         try:
             with self.db.get_session() as session:
                 query = session.query(Usuario)
-
                 if nombre_usuario:
-                    query = query.filter(Usuario.nombre == nombre_usuario)
-                elif email:
-                    query = query.filter(Usuario.email == email)
+                    query = query.filter(Usuario.nombre_usuario == nombre_usuario)
+                elif correo_electronico:
+                    query = query.filter(Usuario.correo_electronico == correo_electronico)
                 else:
                     return False
-
                 return query.first() is not None
-
         except SQLAlchemyError as e:
             print(f"Error verificando usuario: {e}")
             return False

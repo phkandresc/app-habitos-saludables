@@ -1,4 +1,4 @@
-from .Base import Base
+from model.Base import Base
 from sqlalchemy import (Column, Integer, String, Date,ForeignKey)
 
 class Comunidad(Base):

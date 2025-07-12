@@ -1,10 +1,7 @@
-from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from datetime import datetime
 
-from db.Connection import DatabaseConnection
-from model.Comunidad import Comunidad
-from repository.ComunidadRepository import ComunidadRepository
+
 from view.windows.ventana_nueva_comunidad import Ui_Form
 
 
@@ -16,7 +13,6 @@ class RegistroComunidadController:
         self.ui.setupUi(self.vista)
 
         # Inicializar repositorio sin pasar db_session
-        self.comunidad_repository = ComunidadRepository()
 
         self.conectar_eventos()
         self.cargar_categorias()
