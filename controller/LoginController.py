@@ -32,7 +32,7 @@ class LoginController:
         self.ui.btnIniciarSesion.clicked.connect(self.iniciar_sesion)
         # Conecta el checkbox de mostrar contraseña con su función
         self.ui.cbxMostrarPassword.toggled.connect(self.toggle_password_echo_mode)
-        # Acción al presionar la tecla Enter en el campo de contraseña
+        # Accion al presionar la tecla Enter en el campo de contraseña
         self.ui.txtPassword.returnPressed.connect(self.iniciar_sesion)
         # Conecta el botón de registrarse
         self.ui.btnRegistrarse.clicked.connect(self.registrarse)

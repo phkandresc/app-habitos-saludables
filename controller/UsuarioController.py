@@ -1,8 +1,8 @@
 from PyQt6 import QtWidgets
 from model.Usuario import Usuario
-from view.windows.ventana_registro_usuario import Ui_Form
+from view.windows.ventana_registro_usuario import Ui_UserRegister
 
-class UsuarioController(QtWidgets.QWidget,Ui_Form):
+class UsuarioController(QtWidgets.QWidget,Ui_UserRegister):
     def __init__(self, parent=None):
         super(UsuarioController,self).__init__(parent)
         self.setupUi(self)
