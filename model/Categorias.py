@@ -9,4 +9,4 @@ class Categoria(Base):
     nombre = Column(String(100), nullable=False, unique=True)
 
     # Relación con Habitos
-    habitos = relationship("Habitos", back_populates="categoria")
+    habitos = relationship("Habitos", back_populates="categoria_rel")

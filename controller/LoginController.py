@@ -8,14 +8,15 @@ from model.Usuario import Usuario
 from model.Perfil_Usuario import Perfil_Usuario
 from repository.UsuarioRepository import UsuarioRepository
 from view.windows.LoginView import Ui_Login
-from db.connection import get_db_session
+#from db.connection import get_db_session
 from controller.menu_principal_Controller import menu_principal_Controller
 from controller.Usuario_Register_Controller import UsuarioRegisterController
+from db.connection  import DatabaseConnection
 
 class LoginController:
     def __init__(self):
-        self.db_session = get_db_session()
-        self.usuario_repository = UsuarioRepository(self.db_session)
+        self.db = DatabaseConnection()
+        self.usuario_repository = None  # Se inicializa luego con sesión
         # Controlador de registro (se inicializa al abrir la ventana de registro)
         self.register_controller = None
         # Ventana principal de login
@@ -56,17 +57,20 @@ class LoginController:
                 return None
 
             # Autenticar usuario
-            usuario = self.usuario_repository.autenticar_usuario(nombre_usuario, contrasenia)
+            with self.db.get_session() as session:
+                self.usuario_repository = UsuarioRepository(session)
+                usuario = self.usuario_repository.autenticar_usuario(nombre_usuario, contrasenia)
 
-            if usuario:
-                print(f"Usuario {usuario.nombre} ha iniciado sesión correctamente")
-                self.vista.close()
-                self.menu_controller = menu_principal_Controller(usuario)
-                self.menu_controller.vista.show()
-                return usuario
-            else:
-                self.mostrar_error("Usuario o contraseña incorrectos")
-                return None
+                if usuario:
+                    print(f"Usuario autenticado: {usuario.nombre}")
+                    print(f"Perfil cargado: {'Sí' if usuario.perfil else 'No'}")
+                    self.vista.close()
+                    self.menu_controller = menu_principal_Controller(usuario)
+                    self.menu_controller.vista.show()
+                    return usuario
+                else:
+                    self.mostrar_error("Usuario o contraseña incorrectos")
+                    return None
 
         except Exception as e:
             self.mostrar_error(f"Error al iniciar sesión: {str(e)}")

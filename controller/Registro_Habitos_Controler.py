@@ -1,25 +1,29 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from datetime import datetime
-from db.connection import get_db_session
+#from db.connection import get_db_session
+from db.connection  import DatabaseConnection
 from repository.HabitosRepository import HabitosRepository
 from view.windows.ventana_nuevo_habito import Ui_Form
 from model.Habitos import Habitos
 from model.Categorias import Categoria
+
 class registro_habitos:
     def __init__(self, parent_controller=None):
         self.vista = QMainWindow()
         self.ui = Ui_Form()
         self.parent_controller = parent_controller  # Guardamos la referencia
         self.ui.setupUi(self.vista)
-        self.db_session = get_db_session()
-        self.habitos_repository = HabitosRepository(self.db_session)
-        self.cargar_categorias()
-        #self.cargar_categorias_cmb()
+        self.db = DatabaseConnection()
+        self.db_session = None
+        with self.db.get_session() as session:
+            self.habitos_repository = HabitosRepository(session)
+            self.cargar_categorias(session)
+
         self.conectar_eventos()
 
 
-    def cargar_categorias(self):
+    def cargar_categorias(self,session):
         try:
             # Categorías que deberían existir
             categorias_base = [
@@ -32,20 +36,22 @@ class registro_habitos:
             ]
 
             # Obtener las ya existentes
-            existentes = self.db_session.query(Categoria.nombre).all()
+            existentes = session.query(Categoria.nombre).all()
             existentes_nombres = set(cat[0] for cat in existentes)
 
+            # Insertar las que faltan
             # Insertar las que faltan
             for nombre in categorias_base:
                 if nombre not in existentes_nombres:
                     nueva_categoria = Categoria(nombre=nombre)
-                    self.db_session.add(nueva_categoria)
+                    session.add(nueva_categoria)
 
-            self.db_session.commit()  # Guardar nuevas si hubo
+            session.commit()  # Confirmar cambios
 
-            # Recargar categorías actualizadas desde la BD
-            categorias = self.db_session.query(Categoria.nombre).order_by(Categoria.nombre).all()
-            print("[DEBUG] Categorías encontradas en BD:", categorias)
+            # Cargar categorías en el ComboBox
+            categorias = session.query(Categoria.nombre).order_by(Categoria.nombre).all()
+            self.ui.cmbCategoria.clear()
+            self.ui.cmbCategoria.addItems([cat[0] for cat in categorias])
 
             nombres = [cat[0] for cat in categorias]
             self.ui.cmbCategoria.clear()

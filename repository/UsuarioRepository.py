@@ -1,9 +1,10 @@
+from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 from model.Usuario import Usuario
 from model.Perfil_Usuario import Perfil_Usuario
 from typing import List, Optional
 from datetime import date
-from db.connection import get_db_session
+#   from db.connection import get_db_session
 
 
 class UsuarioRepository:
@@ -30,7 +31,7 @@ class UsuarioRepository:
 
     def actualizar_usuario(self, id_usuario: int, usuario_data: dict) -> Optional[Usuario]:
         """Actualizar usuario"""
-        usuario = self.get_by_id(id_usuario)
+        usuario = self.obtener_usuario_por_id(id_usuario)
         if usuario:
             for key, value in usuario_data.items():
                 setattr(usuario, key, value)
@@ -40,7 +41,7 @@ class UsuarioRepository:
 
     def eliminar_usuario(self, id_usuario: int) -> bool:
         """Eliminar usuario"""
-        usuario = self.get_by_id(id_usuario)
+        usuario = self.obtener_usuario_por_id(id_usuario)
         if usuario:
             self.db.delete(usuario)
             self.db.commit()
@@ -50,16 +51,45 @@ class UsuarioRepository:
     def autenticar_usuario(self, nombre_usuario: str, contrasenia: str) -> Optional[Usuario]:
         """Autenticar usuario por nombre y contraseña"""
         try:
+            print(f"Intentando autenticar con: {nombre_usuario} {contrasenia}")
             usuario = self.db.query(Usuario) \
                 .options(joinedload(Usuario.perfil)) \
                 .filter(
-                Usuario.nombre_usuario == nombre_usuario,
+                func.lower(Usuario.nombre_usuario) == func.lower(nombre_usuario.strip()),
+                Usuario.contrasenia == contrasenia.strip()
+            )\
+            .first()
+
+            if usuario:
+                print(f"Autenticación exitosa para: {usuario.nombre_usuario}")
+                if usuario.perfil:
+                    print(f"Perfil encontrado: Peso={usuario.perfil.peso}")
+                else:
+                    print("El usuario no tiene perfil asociado")
+            else:
+                print("Fallo en autenticación - Credenciales no coinciden")
+                # Debug: Mostrar todos los usuarios
+                all_users = self.db.query(Usuario.nombre_usuario, Usuario.contrasenia).all()
+                print("Usuarios en la base de datos:")
+                for u in all_users:
+                    print(f"Usuario: {u.nombre_usuario}, Contraseña: {u.contrasenia}")
+            return usuario
+        except Exception as e:
+            print(f"Error al autenticar usuario: {e}")
+            return None
+
+
+        """try:
+            usuario = self.db.query(Usuario) \
+                .options(joinedload(Usuario.perfil)) \
+                .filter(
+                func.lower(Usuario.nombre_usuario) == nombre_usuario.lower(),
                 Usuario.contrasenia == contrasenia
             ).first()
             return usuario
         except Exception as e:
             print(f"Error al autenticar usuario: {e}")
-            return None
+            return None"""
 
 
 

@@ -1,5 +1,5 @@
 from repository.UsuarioRepository import UsuarioRepository
-from db.connection import get_db
+#from db.connection import get_db
 from datetime import date
 from typing import Optional
 

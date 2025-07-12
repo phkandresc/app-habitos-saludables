@@ -1,7 +1,8 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 
-from db.connection import get_db_session
+from db.connection import DatabaseConnection
+
 from model.Comunidad import Comunidad
 from repository.ComunidadRepository import ComunidadRepository
 from view.windows.ventana_nueva_comunidad import Ui_Form
@@ -13,7 +14,8 @@ class nueva_comunidad:
         self.ui = Ui_Form()
         self.parent_controller = parent_controller  # Guardamos la referencia
         self.ui.setupUi(self.vista)
-        self.db_session = get_db_session()
+        self.db = DatabaseConnection()
+        self.db_session = None
         self.comunidad_repository = ComunidadRepository(self.db_session)
         self.conectar_eventos()
         self.cargar_categorias()
@@ -58,8 +60,10 @@ class nueva_comunidad:
                 categorias = categoriasN
                 #categorias = self.obtener_id_categoria(categoriasN)
             )
-            # Guardar en la base de datos
-            self.comunidad_repository.crear_comuniadad(nuevo_comunidad)
+            with self.db.get_session() as session:
+                comunidad_repo = ComunidadRepository(session)
+                comunidad_repo.crear_comuniadad(nuevo_comunidad)
+
             QMessageBox.information(self.vista, "Éxito", "Comunidad registrada exitosamente.")
             self.limpiar_campos()
 

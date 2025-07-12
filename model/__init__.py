@@ -10,6 +10,7 @@ from .AsignacionNivel import AsignacionNivel
 from .Desafio import Desafio
 from .SeguimientoDiario import SeguimientoDiario
 from .Ranking import Ranking
+from .Participacion import Participacion
 from .PoseeRanking import PoseeRanking
 from .Logro import Logro
 from .Desbloquea import Desbloquea
@@ -26,6 +27,7 @@ __all__ = [
     'Nivel',
     'AsignacionNivel',
     'Desafio',
+    'Participacion',
     'SeguimientoDiario',
     'Ranking',
     'PoseeRanking',

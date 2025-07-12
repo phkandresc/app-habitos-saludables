@@ -3,10 +3,12 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from controller.Registro_Habitos_Controler import registro_habitos
 from controller.Registro_Comunidad_Controller import nueva_comunidad
+from model import Usuario
 from view.windows.ventana_Menu_Principal import Ui_MainWindow
 from controller.Perfil_Usuario_Controller import perfil_usuario
 class menu_principal_Controller:
-    def __init__(self, usuario_autenticado=None):
+    def __init__(self, usuario_autenticado: Usuario):
+        print("Ususario que acaba de ingresar: ",usuario_autenticado.nombre)
         self.usuario_autenticado = usuario_autenticado
         self.vista = QMainWindow()
         self.ui = Ui_MainWindow()
@@ -36,6 +38,6 @@ class menu_principal_Controller:
         self.ingresar_comunidad.vista.show()
 
     def perfil_Usuario(self): # Para igresar a la ventana perfil usuario
-        self.vista.close()
-        self.perfil_usuarios = perfil_usuario(self,self.usuario_autenticado)
+        self.vista.hide()  # Oculta la ventana en lugar de cerrarla
+        self.perfil_usuarios = perfil_usuario(self)
         self.perfil_usuarios.vista.show()

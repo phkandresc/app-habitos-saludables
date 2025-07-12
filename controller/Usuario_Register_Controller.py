@@ -4,13 +4,14 @@ from PyQt6.uic.properties import QtCore
 
 from model.Usuario import Usuario
 from repository.UsuarioRepository import UsuarioRepository
-from db.connection import get_db_session
+#from db.connection import get_db_session
 from view.windows.RegistroView import Ui_Form
+from db.connection  import DatabaseConnection
 
 class UsuarioRegisterController:
     def __init__(self, parent_controller=None):
-        self.db_session = get_db_session()
-        self.usuario_repository = UsuarioRepository(self.db_session)
+        self.db = DatabaseConnection()
+        self.usuario_repository = UsuarioRepository(self.db)
         self.vista = QtWidgets.QWidget()
         self.ui = Ui_Form()
         self.parent_controller = parent_controller  # Guardamos la referencia
@@ -106,5 +107,5 @@ class UsuarioRegisterController:
 
     def cerrar_sesion(self):
         """Cierra la sesión de la base de datos"""
-        if self.db_session:
-            self.db_session.close()
+        if self.db:
+            self.db.close()
