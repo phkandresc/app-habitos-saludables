@@ -2,6 +2,7 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from controller.Registro_Habitos_Controler import registro_habitos
 from controller.RegistroComunidadController import nueva_comunidad
+from controller.HabitosController import HabitosController
 from view.windows.ventana_Menu_Principal import Ui_MainWindow
 
 
@@ -23,6 +24,7 @@ class MenuPrincipalController:
         self.ui.action_Icono_Cerrar_Sesion.triggered.connect(self.cerrar_sesion)
         self.ui.action_Icono_Comunidad.triggered.connect(self.comunidad)
         self.ui.pushButton.clicked.connect(self.nuevo_habito)
+        self.ui.action_item_Habitos_Saludables.triggered.connect(self.habitos)
 
     def cerrar_sesion(self):
         """Cierra la sesión y vuelve al login"""
@@ -92,6 +94,10 @@ class MenuPrincipalController:
         except Exception as e:
             self.mostrar_error(f"Error al abrir comunidades: {str(e)}")
             print(f"Error en comunidad: {e}")
+
+    def habitos(self):
+        """Abre la ventana de gestión de hábitos"""
+        print("VENTANA DE HABITOS")
 
     def mostrar_error(self, mensaje: str):
         """Muestra mensaje de error"""

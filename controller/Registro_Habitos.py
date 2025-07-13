@@ -4,7 +4,7 @@ from datetime import datetime
 from db.Connection import get_db_session
 from repository.HabitosRepository import HabitosRepository
 from view.windows.ventana_nuevo_habito import Ui_Form
-from model.Habitos import Habitos
+from model.Habito import Habito
 from model.Categorias import Categoria
 
 class registro_habitos:
@@ -92,7 +92,7 @@ class registro_habitos:
 
             print(f"[DEBUG] Insertando hábito: nombre={nombre}, frecuencia={frecuencia}, fecha={fecha_actual}, id_categoria={id_categoria}")
 
-            nuevo_habito = Habitos(
+            nuevo_habito = Habito(
                 nombre=nombre,
                 frecuencia=frecuencia,
                 categoria=categoriaN,
