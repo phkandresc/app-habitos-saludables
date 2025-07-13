@@ -14,7 +14,8 @@ class Usuario(Base):
     sexo = Column(String(2), nullable=False)
     nombre_usuario = Column(Text, nullable=False, unique=True)
 
-    perfil = relationship("PerfilUsuario", uselist=False, back_populates="usuario")
+    # Usar string en lugar de clase directa
+    perfil = relationship("PerfilUsuario", uselist=False, back_populates="usuario", lazy="select")
 
     def __repr__(self):
         return f"<Usuario(id_usuario={self.id_usuario}, nombre='{self.nombre}', apellido='{self.apellido}')>"
