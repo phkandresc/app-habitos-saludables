@@ -5,26 +5,56 @@ from controller.RegistroComunidadController import nueva_comunidad
 from controller.HabitosController import HabitosController
 from view.windows.ventana_Menu_Principal import Ui_MainWindow
 
-
 class MenuPrincipalController:
     def __init__(self):
         self.vista = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.vista)
 
-        # Inicializar controladores como None
-        self.habitos_controller = None
-        self.comunidad_controller = None
+        # Diccionario para gestionar controladores secundarios
+        self.controladores = {}
 
-        self.conectar_eventos()
+        self._conectar_eventos()
 
-    def conectar_eventos(self):
+    def _conectar_eventos(self):
         """Conecta los eventos de la interfaz con sus métodos"""
         self.ui.actionCerrar_Sesion.triggered.connect(self.cerrar_sesion)
         self.ui.action_Icono_Cerrar_Sesion.triggered.connect(self.cerrar_sesion)
-        self.ui.action_Icono_Comunidad.triggered.connect(self.comunidad)
-        self.ui.pushButton.clicked.connect(self.nuevo_habito)
-        self.ui.action_item_Habitos_Saludables.triggered.connect(self.habitos)
+        self.ui.action_Icono_Comunidad.triggered.connect(lambda: self.abrir_ventana('comunidad'))
+        self.ui.pushButton.clicked.connect(lambda: self.abrir_ventana('registro_habitos'))
+        self.ui.action_item_Habitos_Saludables.triggered.connect(lambda: self.abrir_ventana('habitos'))
+
+        # Aquí puedes añadir más conexiones para nuevos botones/acciones
+        # Ejemplo:
+        # self.ui.nuevo_boton.clicked.connect(lambda: self.abrir_ventana('nueva_ventana'))
+
+    def abrir_ventana(self, tipo):
+        """Abre una ventana secundaria según el tipo"""
+        try:
+            if tipo == 'habitos':
+                controlador = HabitosController()
+                controlador.ventana_cerrada.connect(self.mostrar_vista)
+            elif tipo == 'registro_habitos':
+                controlador = registro_habitos(self)
+                if hasattr(controlador, 'ventana_cerrada'):
+                    controlador.ventana_cerrada.connect(self.mostrar_vista)
+            elif tipo == 'comunidad':
+                controlador = nueva_comunidad(self)
+            # Agrega aquí más tipos de ventanas según sea necesario
+            else:
+                self.mostrar_error(f"Tipo de ventana desconocido: {tipo}")
+                return
+
+            if controlador and hasattr(controlador, 'vista'):
+                self.controladores[tipo] = controlador
+                self.vista.hide()
+                controlador.vista.show()
+            else:
+                self.mostrar_error(f"Error al abrir ventana: {tipo}")
+
+        except Exception as e:
+            self.mostrar_error(f"Error al abrir ventana '{tipo}': {str(e)}")
+            print(f"Error en abrir_ventana('{tipo}'): {e}")
 
     def cerrar_sesion(self):
         """Cierra la sesión y vuelve al login"""
@@ -36,14 +66,11 @@ class MenuPrincipalController:
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                 QMessageBox.StandardButton.No
             )
-
             if respuesta == QMessageBox.StandardButton.Yes:
                 self.vista.close()
-                # Aquí podrías volver al LoginController si es necesario
-                from controller.Login_Controller import LoginController
+                from controller.LoginController import LoginController
                 login_controller = LoginController()
                 login_controller.mostrar_vista()
-
         except Exception as e:
             self.mostrar_error(f"Error al cerrar sesión: {str(e)}")
             print(f"Error en cerrar_sesion: {e}")
@@ -58,46 +85,12 @@ class MenuPrincipalController:
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                 QMessageBox.StandardButton.No
             )
-
             if respuesta == QMessageBox.StandardButton.Yes:
                 self.vista.close()
                 QtWidgets.QApplication.quit()
-
         except Exception as e:
             self.mostrar_error(f"Error al cerrar aplicación: {str(e)}")
             print(f"Error en cerrar_aplicacion: {e}")
-
-    def nuevo_habito(self):
-        """Abre la ventana de registro de hábitos"""
-        try:
-            self.habitos_controller = registro_habitos(self)
-            if self.habitos_controller and hasattr(self.habitos_controller, 'vista'):
-                self.vista.close()
-                self.habitos_controller.vista.show()
-            else:
-                self.mostrar_error("Error al abrir ventana de hábitos")
-
-        except Exception as e:
-            self.mostrar_error(f"Error al abrir registro de hábitos: {str(e)}")
-            print(f"Error en nuevo_habito: {e}")
-
-    def comunidad(self):
-        """Abre la ventana de comunidades"""
-        try:
-            self.comunidad_controller = nueva_comunidad(self)
-            if self.comunidad_controller and hasattr(self.comunidad_controller, 'vista'):
-                self.vista.close()
-                self.comunidad_controller.vista.show()
-            else:
-                self.mostrar_error("Error al abrir ventana de comunidad")
-
-        except Exception as e:
-            self.mostrar_error(f"Error al abrir comunidades: {str(e)}")
-            print(f"Error en comunidad: {e}")
-
-    def habitos(self):
-        """Abre la ventana de gestión de hábitos"""
-        print("VENTANA DE HABITOS")
 
     def mostrar_error(self, mensaje: str):
         """Muestra mensaje de error"""
@@ -122,11 +115,3 @@ class MenuPrincipalController:
     def cerrar_vista(self):
         """Cierra la ventana del menú principal"""
         self.vista.close()
-
-    def volver_al_menu(self):
-        """Método para que otros controladores vuelvan al menú"""
-        try:
-            self.mostrar_vista()
-        except Exception as e:
-            self.mostrar_error(f"Error al volver al menú: {str(e)}")
-            print(f"Error en volver_al_menu: {e}")

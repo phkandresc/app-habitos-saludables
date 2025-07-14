@@ -12,7 +12,7 @@ class Categoria(Base):
     descripcion = Column(String(255))
 
     # Relación inversa con Habitos
-    habitos = relationship("Habitos", back_populates="categoria_rel", cascade="all, delete-orphan")
+    habitos = relationship("Habito", back_populates="categoria_rel", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<Categoria(id_categoria={self.id_categoria}, nombre='{self.nombre}')>"
