@@ -6,56 +6,308 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>579</height>
+    <width>1029</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Habitos</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+	background-color: rgb(255, 255, 255);
+}
+QCalendarWidget {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    font-family: Arial;
+    font-size: 10pt;
+}
+
+QCalendarWidget QToolButton {
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    font-weight: bold;
+    border: none;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #d0d3d4;
+}
+
+QCalendarWidget QMenu {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+}
+
+QCalendarWidget QSpinBox {
+    width: 70px;
+    font-size: 10pt;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #f7f9fa;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+QCalendarWidget QAbstractItemView {
+    selection-background-color: #27ae60;
+    selection-color: white;
+    background-color: #ffffff;
+    gridline-color: #ecf0f1;
+    outline: 0;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+    font-size: 10pt;
+    color: #2c3e50;
+}
+
+QCalendarWidget QAbstractItemView::item:hover {
+    background-color: rgb(116, 162, 255);
+    color: black;
+}
+
+QCalendarWidget QAbstractItemView::item:selected {
+    background-color: rgb(80, 127, 255);
+    color: white;
+}
+
+QCalendarWidget QAbstractItemView::item:disabled {
+    color: #bdc3c7;
+}
+
+QCalendarWidget QMenu {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    color: #2c3e50;
+}
+
+QCalendarWidget QMenu::item {
+    padding: 5px 15px;
+    background-color: transparent;
+    color: #2c3e50;
+}
+
+QCalendarWidget QMenu::item:selected {
+    background-color: #d0d3d4;
+    color: #2c3e50;
+}
+
+QPushButton#btnVolverIniciarSesion{
+	border: none;
+	background-color: transparent;
+	color: black;
+	text-align: center; 
+	padding: 0px; 
+}
+
+QPushButton#btnVolverIniciarSesion:hover {
+            text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+QPushButton#btnVolverIniciarSesion:pressed {
+            color: gray; /* Optional: Change color on click */
+}
+
+QCheckBox {
+	color:gray;
+}
+QPushButton{
+	background-color: rgb(80, 99, 191);
+	color: rgb(255, 255, 255);
+	border: 2px solid rgb(80, 99, 191);
+	border-radius: 5px;
+	padding: 6px;
+}
+
+QLineEdit{
+	border: none;
+	border-bottom: 2px solid rgb(60, 60, 60);
+}
+
+QLineEdit:focus{
+	border-bottom: 2px solid rgb(103, 129, 255);
+}
+
+QPushButton:hover,
+QPushButton:clicked{
+	background-color: rgb(65, 84, 176);
+	border: 2px solid rgb(65, 84, 176);
+}
+
+QListWidget{
+	background-color: rgb(255, 255, 255);
+}
+
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QCalendarWidget" name="calendarioHabitos">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>40</y>
-      <width>350</width>
-      <height>350</height>
-     </rect>
-    </property>
-    <property name="firstDayOfWeek">
-     <enum>Qt::DayOfWeek::Monday</enum>
-    </property>
-    <property name="gridVisible">
-     <bool>false</bool>
-    </property>
-    <property name="verticalHeaderFormat">
-     <enum>QCalendarWidget::VerticalHeaderFormat::NoVerticalHeader</enum>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listHabitos">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>40</y>
-      <width>551</width>
-      <height>421</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>500</y>
-      <width>521</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Agregar un habito</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="2">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>18</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>32</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>35</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>20</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Calendario</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCalendarWidget" name="calendarioHabitos">
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>400</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>400</width>
+              <height>400</height>
+             </size>
+            </property>
+            <property name="firstDayOfWeek">
+             <enum>Qt::DayOfWeek::Monday</enum>
+            </property>
+            <property name="gridVisible">
+             <bool>false</bool>
+            </property>
+            <property name="verticalHeaderFormat">
+             <enum>QCalendarWidget::VerticalHeaderFormat::NoVerticalHeader</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Mis habitos</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="listHabitos">
+            <property name="minimumSize">
+             <size>
+              <width>500</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnAgregarUnHabito">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Agregar un habito</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="3">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>33</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="1">
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>18</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
