@@ -1,48 +1,39 @@
 #!/bin/bash
 
-# Script to convert PyQt6 UI files to Python files
-# Usage: ./convert_ui_to_py.sh
+# Script para convertir archivos UI de PyQt6 a Python en el paquete view/windows
+# Debe ejecutarse desde view/ui
 
-echo "Converting PyQt6 UI files to Python..."
+echo "Convirtiendo archivos UI de PyQt6 a Python en el paquete view/windows..."
 
-# Check if there are any .ui files in the current directory
+# Crear el directorio ../windows si no existe
+mkdir -p ../windows
+
+# Buscar archivos .ui en el directorio actual
 ui_files=(*.ui)
 
 if [ ! -e "${ui_files[0]}" ]; then
-    echo "Error: No UI files found in current directory."
-    echo "Please place your .ui files in this directory and run the script again."
+    echo "Error: No se encontraron archivos UI en el directorio actual."
+    echo "Coloca tus archivos .ui aquí y ejecuta el script nuevamente."
     exit 1
 fi
 
-# Counter for successful conversions
 count=0
 
-# Process each UI file
 for ui_file in "${ui_files[@]}"; do
-    # Extract the base name without extension
     base_name="${ui_file%.ui}"
-    
-    # Set the output Python file name
-    py_file="${base_name}.py"
-    
-    echo "Converting: $ui_file → $py_file"
-    
-    # Convert the UI file to Python
+    py_file="../windows/${base_name}.py"
+
+    echo "Convirtiendo: $ui_file → $py_file"
     pyuic6 -o "$py_file" "$ui_file"
-    
-    # Check if conversion was successful
+
     if [ $? -eq 0 ]; then
-        echo "✓ Conversion successful: $py_file"
+        echo "✓ Conversión exitosa: $py_file"
         ((count++))
     else
-        echo "✗ Error converting $ui_file"
+        echo "✗ Error al convertir $ui_file"
     fi
 done
 
 echo "----------------------------------------"
-echo "Conversion completed: $count file(s) converted."
+echo "Conversión completada: $count archivo(s) convertido(s)."
 echo "----------------------------------------"
-
-# Make the script executable after creating it
-# Run: chmod +x convert_ui_to_py.sh
-

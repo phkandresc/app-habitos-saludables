@@ -2,7 +2,7 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from datetime import datetime
 from repository.HabitosRepository import HabitosRepository
-from view.windows.ventana_nuevo_habito import Ui_Form
+from view.windows.VentanaNuevoHabito import Ui_ventanaRegistrarHabito
 from model.Categorias import Categoria
 from db.Connection import DatabaseConnection
 from sqlalchemy.orm import sessionmaker

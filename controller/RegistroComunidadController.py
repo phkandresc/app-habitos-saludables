@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from datetime import datetime
 
 
-from view.windows.ventana_nueva_comunidad import Ui_Form
+from view.windows.VentanaNuevaComunidad import Ui_Form
 
 
 class RegistroComunidadController:

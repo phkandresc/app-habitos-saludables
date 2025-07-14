@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from controller.Registro_Habitos_Controler import registro_habitos
 from controller.RegistroComunidadController import nueva_comunidad
 from controller.HabitosController import HabitosController
-from view.windows.ventana_Menu_Principal import Ui_MainWindow
+from view.windows.VentanaMenuPrincipal import Ui_MainWindow
 
 class MenuPrincipalController:
     def __init__(self):
