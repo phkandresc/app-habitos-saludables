@@ -6,7 +6,7 @@ import re
 
 from repository.UsuarioRepository import UsuarioRepository
 from repository.PerfilUsuarioRepository import PerfilUsuarioRepository
-from view.windows.RegistroView import Ui_ventanaRegistrarse
+from view.windows.VentanaRegistro import Ui_ventanaRegistrarse
 
 
 class UsuarioRegisterController:

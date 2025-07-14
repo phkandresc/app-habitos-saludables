@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from db.Connection import DatabaseConnection
-from model.Habitos import Habitos
+from model.Habito import Habito  # Cambio: singular y nombre correcto
 from typing import List, Optional, Dict
 from datetime import date
 
@@ -12,11 +12,11 @@ class HabitosRepository:
     def __init__(self):
         self.db = DatabaseConnection()
 
-    def crear_habito(self, habito_data: Dict) -> Optional[Habitos]:
+    def crear_habito(self, habito_data: Dict) -> Optional[Habito]:
         """Crear un nuevo hábito"""
         try:
             with self.db.get_session() as session:
-                nuevo_habito = Habitos(
+                nuevo_habito = Habito(
                     nombre=habito_data['nombre'],
                     frecuencia=habito_data['frecuencia'],
                     categoria=habito_data['categoria'],
@@ -25,8 +25,7 @@ class HabitosRepository:
                 )
 
                 session.add(nuevo_habito)
-                session.flush()  # Para obtener el ID antes del commit
-                # Hacer que el objeto sea independiente de la sesión
+                session.flush()
                 session.expunge(nuevo_habito)
                 return nuevo_habito
 
@@ -34,16 +33,15 @@ class HabitosRepository:
             print(f"Error creando hábito: {e}")
             return None
 
-    def obtener_habito_por_id(self, id_habito: int) -> Optional[Habitos]:
+    def obtener_habito_por_id(self, id_habito: int) -> Optional[Habito]:
         """Obtener hábito por ID"""
         try:
             with self.db.get_session() as session:
-                habito = session.query(Habitos).filter(
-                    Habitos.id_habito == id_habito
+                habito = session.query(Habito).filter(
+                    Habito.id_habito == id_habito
                 ).first()
 
                 if habito:
-                    # Hacer que el objeto sea independiente de la sesión
                     session.expunge(habito)
                     return habito
                 return None
@@ -51,54 +49,67 @@ class HabitosRepository:
             print(f"Error obteniendo hábito: {e}")
             return None
 
-    def obtener_todos_habitos(self) -> List[Habitos]:
+    def obtener_todos_habitos(self) -> List[Habito]:
         """Obtener todos los hábitos"""
         try:
             with self.db.get_session() as session:
-                return session.query(Habitos).all()
+                habitos = session.query(Habito).all()
+                # Expunge todos los objetos para hacerlos independientes
+                for habito in habitos:
+                    session.expunge(habito)
+                return habitos
         except SQLAlchemyError as e:
             print(f"Error obteniendo hábitos: {e}")
             return []
 
-    def obtener_habitos_por_categoria(self, categoria: str) -> List[Habitos]:
+    def obtener_habitos_por_categoria(self, categoria: str) -> List[Habito]:
         """Obtener hábitos por categoría"""
         try:
             with self.db.get_session() as session:
-                return session.query(Habitos).filter(
-                    Habitos.categoria.ilike(f"%{categoria}%")
+                habitos = session.query(Habito).filter(
+                    Habito.categoria.ilike(f"%{categoria}%")
                 ).all()
+                for habito in habitos:
+                    session.expunge(habito)
+                return habitos
         except SQLAlchemyError as e:
             print(f"Error obteniendo hábitos por categoría: {e}")
             return []
 
-    def obtener_habitos_por_categoria_id(self, id_categoria: int) -> List[Habitos]:
+    def obtener_habitos_por_categoria_id(self, id_categoria: int) -> List[Habito]:
         """Obtener hábitos por ID de categoría"""
         try:
             with self.db.get_session() as session:
-                return session.query(Habitos).filter(
-                    Habitos.id_categoria == id_categoria
+                habitos = session.query(Habito).filter(
+                    Habito.id_categoria == id_categoria
                 ).all()
+                for habito in habitos:
+                    session.expunge(habito)
+                return habitos
         except SQLAlchemyError as e:
             print(f"Error obteniendo hábitos por ID categoría: {e}")
             return []
 
-    def buscar_habitos_por_nombre(self, nombre: str) -> List[Habitos]:
+    def buscar_habitos_por_nombre(self, nombre: str) -> List[Habito]:
         """Buscar hábitos por nombre (búsqueda parcial)"""
         try:
             with self.db.get_session() as session:
-                return session.query(Habitos).filter(
-                    Habitos.nombre.ilike(f"%{nombre}%")
+                habitos = session.query(Habito).filter(
+                    Habito.nombre.ilike(f"%{nombre}%")
                 ).all()
+                for habito in habitos:
+                    session.expunge(habito)
+                return habitos
         except SQLAlchemyError as e:
             print(f"Error buscando hábitos por nombre: {e}")
             return []
 
-    def actualizar_habito(self, id_habito: int, habito_data: Dict) -> Optional[Habitos]:
+    def actualizar_habito(self, id_habito: int, habito_data: Dict) -> Optional[Habito]:
         """Actualizar un hábito existente"""
         try:
             with self.db.get_session() as session:
-                habito = session.query(Habitos).filter(
-                    Habitos.id_habito == id_habito
+                habito = session.query(Habito).filter(
+                    Habito.id_habito == id_habito
                 ).first()
 
                 if habito:
@@ -107,7 +118,6 @@ class HabitosRepository:
                             setattr(habito, key, value)
 
                     session.flush()
-                    # Hacer que el objeto sea independiente de la sesión
                     session.expunge(habito)
                     return habito
                 return None
@@ -120,8 +130,8 @@ class HabitosRepository:
         """Eliminar un hábito"""
         try:
             with self.db.get_session() as session:
-                habito = session.query(Habitos).filter(
-                    Habitos.id_habito == id_habito
+                habito = session.query(Habito).filter(
+                    Habito.id_habito == id_habito
                 ).first()
 
                 if habito:
@@ -137,25 +147,14 @@ class HabitosRepository:
         """Verificar si existe un hábito"""
         try:
             with self.db.get_session() as session:
-                return session.query(Habitos).filter(
-                    Habitos.id_habito == id_habito
+                return session.query(Habito).filter(
+                    Habito.id_habito == id_habito
                 ).first() is not None
         except SQLAlchemyError as e:
             print(f"Error verificando existencia del hábito: {e}")
             return False
 
-    def obtener_habitos_por_usuario(self, id_usuario: int) -> List[Habitos]:
-        """Obtener hábitos de un usuario específico"""
-        try:
-            with self.db.get_session() as session:
-                return session.query(Habitos).filter(
-                    Habitos.id_usuario == id_usuario
-                ).all()
-        except SQLAlchemyError as e:
-            print(f"Error obteniendo hábitos por usuario: {e}")
-            return []
-
-    def obtener_habitos_recientes(self, dias: int = 7) -> List[Habitos]:
+    def obtener_habitos_recientes(self, dias: int = 7) -> List[Habito]:
         """Obtener hábitos creados en los últimos N días"""
         try:
             from datetime import timedelta
@@ -163,9 +162,13 @@ class HabitosRepository:
             fecha_limite = date.today() - timedelta(days=dias)
 
             with self.db.get_session() as session:
-                return session.query(Habitos).filter(
-                    Habitos.fecha_creacion >= fecha_limite
-                ).order_by(Habitos.fecha_creacion.desc()).all()
+                habitos = session.query(Habito).filter(
+                    Habito.fecha_creacion >= fecha_limite
+                ).order_by(Habito.fecha_creacion.desc()).all()
+
+                for habito in habitos:
+                    session.expunge(habito)
+                return habitos
 
         except SQLAlchemyError as e:
             print(f"Error obteniendo hábitos recientes: {e}")

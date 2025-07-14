@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QMessageBox, QMainWindow
 
 from model.Usuario import Usuario
 from repository.UsuarioRepository import UsuarioRepository
-from view.windows.LoginView import Ui_Login
+from view.windows.VentanaLogin import Ui_Login
 
 
 class LoginController:

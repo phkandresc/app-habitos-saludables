@@ -7,6 +7,11 @@ from dotenv import load_dotenv
 import os
 import logging
 from typing import Optional
+
+import importlib
+import pkgutil
+import model
+
 from model.Base import Base
 
 # Configurar logging
@@ -27,8 +32,15 @@ class DatabaseConnection:
         return cls._instance
 
     def __init__(self):
+        self.import_all_models()
         if self._engine is None:
             self._initialize_connection()
+
+    def import_all_models(self):
+        package = model
+        for _, module_name, _ in pkgutil.iter_modules(package.__path__):
+            if module_name not in ("Base", "__init__"):
+                importlib.import_module(f"model.{module_name}")
 
     def _initialize_connection(self):
         """Inicializa la conexión con validación"""
@@ -111,6 +123,7 @@ class DatabaseConnection:
 
     def create_tables(self):
         """Crea todas las tablas definidas en los modelos"""
+
         try:
             Base.metadata.create_all(bind=self._engine)
             logger.info("Database tables created successfully")
