@@ -14,7 +14,7 @@ class LoginController:
         self.menu_controller = None
         self.registro_controller = None
         # Usuario actualmente autenticado
-        self.usuario_actual = None
+        self.usuario_actual: Optional[Usuario] = None
 
         # Configuración de la ventana principal
         self.vista = QMainWindow()
@@ -28,7 +28,6 @@ class LoginController:
     def _configurar_ventana(self):
         """Configuración inicial de la ventana"""
         self.vista.setWindowTitle("Iniciar Sesión")
-        # Centrar la ventana en la pantalla
         self.vista.setFixedSize(self.vista.size())
 
     def conectar_eventos(self):
@@ -44,7 +43,7 @@ class LoginController:
                      else QtWidgets.QLineEdit.EchoMode.Password)
         self.ui.txtPassword.setEchoMode(echo_mode)
 
-    def iniciar_sesion(self) -> Optional[Usuario]:
+    def iniciar_sesion(self):
         """Maneja el proceso de inicio de sesión"""
         nombre_usuario = self.ui.txtNombreUsuario.text().strip()
         contrasenia = self.ui.txtPassword.text().strip()
@@ -52,7 +51,7 @@ class LoginController:
         try:
             # Validar entrada
             if not self._validar_campos(nombre_usuario, contrasenia):
-                return None
+                return
 
             # Autenticar usuario
             usuario = self.usuario_repository.autenticar_usuario(nombre_usuario, contrasenia)
@@ -61,16 +60,13 @@ class LoginController:
                 self.usuario_actual = usuario
                 print(f"Usuario {usuario.nombre} ha iniciado sesión correctamente")
                 self._abrir_menu_principal()
-                return usuario
             else:
                 self.mostrar_error("Usuario o contraseña incorrectos")
                 self._limpiar_password()
-                return None
 
         except Exception as e:
             self.mostrar_error(f"Error al iniciar sesión: {str(e)}")
             print(f"Error en iniciar_sesion: {e}")
-            return None
 
     def _validar_campos(self, nombre_usuario: str, contrasenia: str) -> bool:
         """Valida que los campos no estén vacíos"""
@@ -81,13 +77,32 @@ class LoginController:
 
     def _abrir_menu_principal(self):
         """Abre el menú principal y cierra la ventana de login"""
+        if not self.usuario_actual:
+            self.mostrar_error("No hay usuario autenticado")
+            return
+
         try:
             # Importación dinámica para evitar dependencias circulares
             from controller.MenuPrincipalController import MenuPrincipalController
 
             self.vista.close()
-            self.menu_controller = MenuPrincipalController()
+            # Pasar el usuario autenticado al constructor
+            self.menu_controller = MenuPrincipalController(self.usuario_actual)
             self.menu_controller.vista.show()
+
+        except TypeError as e:
+            # Error específico si MenuPrincipalController no acepta parámetros
+            print(f"MenuPrincipalController no acepta usuario como parámetro: {e}")
+            try:
+                # Fallback: crear sin parámetros y asignar después
+                self.menu_controller = MenuPrincipalController()
+                if hasattr(self.menu_controller, 'set_usuario_actual'):
+                    self.menu_controller.set_usuario_actual(self.usuario_actual)
+                self.menu_controller.vista.show()
+            except Exception as fallback_error:
+                self.mostrar_error(f"Error al abrir menú principal: {str(fallback_error)}")
+                print(f"Error en fallback _abrir_menu_principal: {fallback_error}")
+
         except Exception as e:
             self.mostrar_error(f"Error al abrir menú principal: {str(e)}")
             print(f"Error en _abrir_menu_principal: {e}")
@@ -95,7 +110,6 @@ class LoginController:
     def abrir_registro(self):
         """Abre la ventana de registro"""
         try:
-            # Importación dinámica para evitar dependencias circulares
             from controller.UsuarioRegisterController import UsuarioRegisterController
 
             self.vista.close()

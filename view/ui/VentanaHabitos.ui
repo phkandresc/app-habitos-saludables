@@ -117,7 +117,7 @@ QPushButton#btnVolverIniciarSesion:pressed {
 QCheckBox {
 	color:gray;
 }
-QPushButton{
+#btnAgregarUnHabito{
 	background-color: rgb(80, 99, 191);
 	color: rgb(255, 255, 255);
 	border: 2px solid rgb(80, 99, 191);
@@ -134,8 +134,8 @@ QLineEdit:focus{
 	border-bottom: 2px solid rgb(103, 129, 255);
 }
 
-QPushButton:hover,
-QPushButton:clicked{
+#btnAgregarUnHabito:hover,
+#btnAgregarUnHabito:clicked{
 	background-color: rgb(65, 84, 176);
 	border: 2px solid rgb(65, 84, 176);
 }

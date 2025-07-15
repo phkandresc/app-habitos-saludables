@@ -4,12 +4,15 @@ from controller.Registro_Habitos_Controler import registro_habitos
 from controller.RegistroComunidadController import nueva_comunidad
 from controller.HabitosController import HabitosController
 from view.windows.VentanaMenuPrincipal import Ui_MainWindow
+from model.Usuario import Usuario
 
 class MenuPrincipalController:
-    def __init__(self):
+    def __init__(self, usuario_autenticado: Usuario):
         self.vista = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.vista)
+        # Usuario autenticado
+        self.usuario_autenticado = usuario_autenticado
 
         # Diccionario para gestionar controladores secundarios
         self.controladores = {}
@@ -32,7 +35,7 @@ class MenuPrincipalController:
         """Abre una ventana secundaria según el tipo"""
         try:
             if tipo == 'habitos':
-                controlador = HabitosController()
+                controlador = HabitosController(self.usuario_autenticado.id_usuario)
                 controlador.ventana_cerrada.connect(self.mostrar_vista)
             elif tipo == 'registro_habitos':
                 controlador = registro_habitos(self)

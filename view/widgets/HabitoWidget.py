@@ -7,11 +7,11 @@ class HabitoWidget(QWidget):
     eliminarClicked = pyqtSignal(int)
     estadoClicked = pyqtSignal(int)
 
-    def __init__(self, habito, categoria_nombre):
+    def __init__(self, habito, categoria_nombre, estado="pendiente"):
         super().__init__()
 
         self.habito_id = habito.id_habito
-        self.estado = habito.estado.lower()
+        self.estado = estado.lower()  # Usar el parámetro estado, no habito.estado
 
         layout = QVBoxLayout()
         layout.setContentsMargins(10, 10, 10, 10)

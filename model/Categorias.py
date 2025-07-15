@@ -9,7 +9,6 @@ class Categoria(Base):
 
     id_categoria = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(100), nullable=False)
-    descripcion = Column(String(255))
 
     # Relación inversa con Habitos
     habitos = relationship("Habito", back_populates="categoria_rel", cascade="all, delete-orphan")
