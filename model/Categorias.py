@@ -12,6 +12,7 @@ class Categoria(Base):
 
     # Relación inversa con Habitos
     habitos = relationship("Habito", back_populates="categoria_rel", cascade="all, delete-orphan")
+    comunidades_categoria = relationship("ComunidadCategoria", back_populates="categoria")
 
     def __repr__(self):
         return f"<Categoria(id_categoria={self.id_categoria}, nombre='{self.nombre}')>"
