@@ -19,9 +19,9 @@ class Comunidad(Base):
     # Relaciones
     usuario_creador = relationship("Usuario", back_populates="comunidades_creadas", foreign_keys=[id_creador])
     categorias_comunidad = relationship("ComunidadCategoria", back_populates="comunidad")
+    miembros_incorporados = relationship("IncorporaComunidad", back_populates="comunidad")
 
     def __repr__(self):
         """Representación string del objeto"""
         return (f"<Comunidad(id_comunidad={self.id_comunidad}, nombre='{self.nombre}', "
                 f"id_creador={self.id_creador})>")
-

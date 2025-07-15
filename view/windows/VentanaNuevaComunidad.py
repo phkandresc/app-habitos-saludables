@@ -9,18 +9,34 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(512, 556)
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        Form.setFont(font)
-        Form.setStyleSheet("QMainWindow {\n"
+class Ui_ventanaNuevaComunidad(object):
+    def setupUi(self, ventanaNuevaComunidad):
+        ventanaNuevaComunidad.setObjectName("ventanaNuevaComunidad")
+        ventanaNuevaComunidad.resize(563, 406)
+        ventanaNuevaComunidad.setStyleSheet("\n"
+"QCheckBox {\n"
+"    spacing: 8px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 14px;\n"
+"    height: 14px;\n"
+"    border: 2px solid rgb(0, 0, 0);\n"
+"    border-radius: 4px;\n"
+"    background-color: white;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked {\n"
+"    background-color: rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"\n"
+"QMainWindow {\n"
 "    background-color: rgb(255, 255, 255)\n"
 "}\n"
 "\n"
-"QPushButton#btnRegistrarse{\n"
+"QPushButton#btnVolverIniciarSesion{\n"
 "    border: none;\n"
 "    background-color: transparent;\n"
 "    color: black;\n"
@@ -28,25 +44,13 @@ class Ui_Form(object):
 "    padding: 0px; \n"
 "}\n"
 "\n"
-"QPushButton#btnRegistrarse:hover {\n"
-"            text-decoration: underline; /* Optional: Add underline on hover */\n"
-"}\n"
 "\n"
-"QPushButton#btnRegistrarse:pressed {\n"
-"            color: gray; /* Optional: Change color on click */\n"
-"}\n"
-"\n"
-"QCheckBox {\n"
-"    color:gray;\n"
-"}\n"
 "QPushButton{\n"
 "    background-color: rgb(80, 99, 191);\n"
 "    color: rgb(255, 255, 255);\n"
 "    border: 2px solid rgb(80, 99, 191);\n"
 "    border-radius: 5px;\n"
 "    padding: 6px;\n"
-"    font-family: \"Adwaita Sans\"; /* Establece la fuente */\n"
-"     /* Establece el tamaño de la fuente */\n"
 "}\n"
 "\n"
 "QLineEdit{\n"
@@ -62,97 +66,118 @@ class Ui_Form(object):
 "QPushButton:clicked{\n"
 "    background-color: rgb(65, 84, 176);\n"
 "    border: 2px solid rgb(65, 84, 176);\n"
-"}")
-        self.gridLayoutWidget = QtWidgets.QWidget(parent=Form)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(10, 10, 481, 548))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+"}\n"
+"")
+        self.centralwidget = QtWidgets.QWidget(parent=ventanaNuevaComunidad)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        self.cbxCategorias = QtWidgets.QComboBox(parent=self.gridLayoutWidget)
+        spacerItem = QtWidgets.QSpacerItem(20, 37, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.lblTitulo = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
-        font.setPointSize(12)
-        self.cbxCategorias.setFont(font)
-        self.cbxCategorias.setObjectName("cbxCategorias")
-        self.gridLayout.addWidget(self.cbxCategorias, 5, 1, 1, 1)
-        self.label_5 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_5.setFont(font)
-        self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 6, 1, 1, 1)
-        self.label = QtWidgets.QLabel(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(16)
+        font.setFamily("MS Sans Serif")
+        font.setPointSize(18)
         font.setBold(True)
-        font.setWeight(75)
-        self.label.setFont(font)
-        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 2)
-        self.label_3 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
+        self.lblTitulo.setFont(font)
+        self.lblTitulo.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.lblTitulo.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.lblTitulo.setObjectName("lblTitulo")
+        self.verticalLayout_7.addWidget(self.lblTitulo)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setSpacing(15)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.lblNombre = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 2, 1, 1, 1)
-        self.txtNombre = QtWidgets.QLineEdit(parent=self.gridLayoutWidget)
+        self.lblNombre.setFont(font)
+        self.lblNombre.setObjectName("lblNombre")
+        self.verticalLayout_2.addWidget(self.lblNombre)
+        self.txtNombre = QtWidgets.QLineEdit(parent=self.centralwidget)
+        self.txtNombre.setMinimumSize(QtCore.QSize(500, 25))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.txtNombre.setFont(font)
         self.txtNombre.setObjectName("txtNombre")
-        self.gridLayout.addWidget(self.txtNombre, 3, 1, 1, 1)
-        self.btnRegresar = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Adwaita Sans")
-        self.btnRegresar.setFont(font)
-        self.btnRegresar.setObjectName("btnRegresar")
-        self.gridLayout.addWidget(self.btnRegresar, 12, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout.addItem(spacerItem, 8, 1, 1, 1)
-        self.label_2 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
-        self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("iconos/icons8-comunidad.png"))
-        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 2)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem1, 11, 1, 1, 1)
-        self.lineEdit = QtWidgets.QLineEdit(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.lineEdit.setFont(font)
-        self.lineEdit.setObjectName("lineEdit")
-        self.gridLayout.addWidget(self.lineEdit, 7, 1, 1, 1)
-        self.btnCrear = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Adwaita Sans")
-        self.btnCrear.setFont(font)
-        self.btnCrear.setObjectName("btnCrear")
-        self.gridLayout.addWidget(self.btnCrear, 9, 1, 1, 1)
-        self.label_4 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
+        self.verticalLayout_2.addWidget(self.txtNombre)
+        self.verticalLayout_4.addLayout(self.verticalLayout_2)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.lblCategoria = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_4.setFont(font)
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 4, 1, 1, 1)
-        self.btnCancelar = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
+        self.lblCategoria.setFont(font)
+        self.lblCategoria.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lblCategoria.setObjectName("lblCategoria")
+        self.verticalLayout.addWidget(self.lblCategoria)
+        self.cmbCategoria = QtWidgets.QComboBox(parent=self.centralwidget)
+        self.cmbCategoria.setMinimumSize(QtCore.QSize(500, 30))
         font = QtGui.QFont()
-        font.setFamily("Adwaita Sans")
+        font.setPointSize(12)
+        self.cmbCategoria.setFont(font)
+        self.cmbCategoria.setObjectName("cmbCategoria")
+        self.cmbCategoria.addItem("")
+        self.cmbCategoria.addItem("")
+        self.cmbCategoria.addItem("")
+        self.cmbCategoria.addItem("")
+        self.cmbCategoria.addItem("")
+        self.cmbCategoria.addItem("")
+        self.verticalLayout.addWidget(self.cmbCategoria)
+        self.verticalLayout_4.addLayout(self.verticalLayout)
+        self.verticalLayout_6.addLayout(self.verticalLayout_4)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_6.addItem(spacerItem1)
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.btnCrearComunidad = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btnCrearComunidad.setMinimumSize(QtCore.QSize(500, 35))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnCrearComunidad.setFont(font)
+        self.btnCrearComunidad.setStyleSheet("")
+        self.btnCrearComunidad.setObjectName("btnCrearComunidad")
+        self.verticalLayout_5.addWidget(self.btnCrearComunidad)
+        self.btnCancelar = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btnCancelar.setMinimumSize(QtCore.QSize(500, 35))
+        font = QtGui.QFont()
+        font.setPointSize(12)
         self.btnCancelar.setFont(font)
+        self.btnCancelar.setStyleSheet("")
         self.btnCancelar.setObjectName("btnCancelar")
-        self.gridLayout.addWidget(self.btnCancelar, 10, 1, 1, 1)
+        self.verticalLayout_5.addWidget(self.btnCancelar)
+        self.verticalLayout_6.addLayout(self.verticalLayout_5)
+        self.verticalLayout_7.addLayout(self.verticalLayout_6)
+        self.gridLayout.addLayout(self.verticalLayout_7, 1, 1, 2, 1)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout.addItem(spacerItem2, 1, 2, 1, 1)
+        spacerItem3 = QtWidgets.QSpacerItem(9, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout.addItem(spacerItem3, 2, 0, 1, 1)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 37, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout.addItem(spacerItem4, 3, 1, 1, 1)
+        ventanaNuevaComunidad.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(ventanaNuevaComunidad)
+        QtCore.QMetaObject.connectSlotsByName(ventanaNuevaComunidad)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, ventanaNuevaComunidad):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_5.setText(_translate("Form", "Creador:"))
-        self.label.setText(_translate("Form", "NUEVA COMUNIDAD"))
-        self.label_3.setText(_translate("Form", "Nombre:"))
-        self.btnRegresar.setText(_translate("Form", "Regresar"))
-        self.btnCrear.setText(_translate("Form", "Crear"))
-        self.label_4.setText(_translate("Form", "Categorias:"))
-        self.btnCancelar.setText(_translate("Form", "Cancelar"))
+        ventanaNuevaComunidad.setWindowTitle(_translate("ventanaNuevaComunidad", "Nueva Comunidad"))
+        self.lblTitulo.setText(_translate("ventanaNuevaComunidad", "Comunidad"))
+        self.lblNombre.setText(_translate("ventanaNuevaComunidad", "Nombre:"))
+        self.lblCategoria.setText(_translate("ventanaNuevaComunidad", "Categoria:"))
+        self.cmbCategoria.setItemText(0, _translate("ventanaNuevaComunidad", "Planificar comidas balanceadas."))
+        self.cmbCategoria.setItemText(1, _translate("ventanaNuevaComunidad", "Actividad Física"))
+        self.cmbCategoria.setItemText(2, _translate("ventanaNuevaComunidad", "Beber suficiente agua"))
+        self.cmbCategoria.setItemText(3, _translate("ventanaNuevaComunidad", "Meditar 5-10 minutos al día."))
+        self.cmbCategoria.setItemText(4, _translate("ventanaNuevaComunidad", "Comer proteínas magras"))
+        self.cmbCategoria.setItemText(5, _translate("ventanaNuevaComunidad", "Sueño Reparador"))
+        self.btnCrearComunidad.setToolTip(_translate("ventanaNuevaComunidad", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Registrar</span></p></body></html>"))
+        self.btnCrearComunidad.setWhatsThis(_translate("ventanaNuevaComunidad", "<html><head/><body><p align=\"center\">Registrar</p></body></html>"))
+        self.btnCrearComunidad.setText(_translate("ventanaNuevaComunidad", "Crear comunidad"))
+        self.btnCancelar.setText(_translate("ventanaNuevaComunidad", "Cancelar"))

@@ -1,8 +1,7 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
-from controller.Registro_Habitos_Controler import registro_habitos
-from controller.RegistroComunidadController import nueva_comunidad
 from controller.HabitosController import HabitosController
+from controller.ComunidadController import ComunidadController
 from view.windows.VentanaMenuPrincipal import Ui_MainWindow
 from model.Usuario import Usuario
 
@@ -25,11 +24,23 @@ class MenuPrincipalController:
         self.ui.action_Icono_Cerrar_Sesion.triggered.connect(self.cerrar_sesion)
         self.ui.action_Icono_Comunidad.triggered.connect(lambda: self.abrir_ventana('comunidad'))
         self.ui.pushButton.clicked.connect(lambda: self.abrir_ventana('registro_habitos'))
-        self.ui.action_item_Habitos_Saludables.triggered.connect(lambda: self.abrir_ventana('habitos'))
+        self.ui.action_item_Habitos_Saludables.triggered.connect(self.habitos)
 
         # Aquí puedes añadir más conexiones para nuevos botones/acciones
         # Ejemplo:
         # self.ui.nuevo_boton.clicked.connect(lambda: self.abrir_ventana('nueva_ventana'))
+
+    def habitos(self):
+        """Abrir ventana de hábitos"""
+        try:
+            controlador = HabitosController(self.usuario_autenticado.id_usuario)
+            controlador.ventana_cerrada.connect(self.mostrar_vista)
+            self.controladores['habitos'] = controlador
+            self.vista.hide()
+            controlador.vista.show()
+        except Exception as e:
+            self.mostrar_error(f"Error al abrir ventana de hábitos: {str(e)}")
+            print(f"Error en habitos(): {e}")
 
     def abrir_ventana(self, tipo):
         """Abre una ventana secundaria según el tipo"""
@@ -42,7 +53,8 @@ class MenuPrincipalController:
                 if hasattr(controlador, 'ventana_cerrada'):
                     controlador.ventana_cerrada.connect(self.mostrar_vista)
             elif tipo == 'comunidad':
-                controlador = nueva_comunidad(self)
+                controlador = ComunidadController(self.usuario_autenticado.id_usuario)
+                controlador.ventana_cerrada.connect(self.mostrar_vista)
             # Agrega aquí más tipos de ventanas según sea necesario
             else:
                 self.mostrar_error(f"Tipo de ventana desconocido: {tipo}")
