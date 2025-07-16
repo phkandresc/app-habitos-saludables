@@ -2,6 +2,7 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from controller.HabitosController import HabitosController
 from controller.ComunidadController import ComunidadController
+from controller.LogrosController import LogrosController
 from view.windows.VentanaMenuPrincipal import Ui_MainWindow
 from model.Usuario import Usuario
 
@@ -25,6 +26,8 @@ class MenuPrincipalController:
         self.ui.action_Icono_Comunidad.triggered.connect(lambda: self.abrir_ventana('comunidad'))
         self.ui.pushButton.clicked.connect(lambda: self.abrir_ventana('registro_habitos'))
         self.ui.action_item_Habitos_Saludables.triggered.connect(self.habitos)
+
+        self.ui.action_Icono_Logros.triggered.connect(lambda: self.abrir_ventana('logros'))
 
         # Aquí puedes añadir más conexiones para nuevos botones/acciones
         # Ejemplo:
@@ -55,6 +58,10 @@ class MenuPrincipalController:
             elif tipo == 'comunidad':
                 controlador = ComunidadController(self.usuario_autenticado.id_usuario)
                 controlador.ventana_cerrada.connect(self.mostrar_vista)
+            elif tipo == 'logros':
+                controlador = LogrosController(self.usuario_autenticado.id_usuario)
+                controlador.ventana_cerrada.connect(self.mostrar_vista)
+
             # Agrega aquí más tipos de ventanas según sea necesario
             else:
                 self.mostrar_error(f"Tipo de ventana desconocido: {tipo}")

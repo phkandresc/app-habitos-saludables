@@ -20,6 +20,7 @@ class Usuario(Base):
     seguimientos = relationship("SeguimientoDiario", back_populates="usuario_rel")
     comunidades_creadas = relationship("Comunidad", back_populates="usuario_creador")
     comunidades_incorporadas = relationship("IncorporaComunidad", back_populates="usuario")
+    logros = relationship("Logro", secondary="desbloquea", back_populates="usuarios")
 
     def __repr__(self):
         return f"<Usuario(id_usuario={self.id_usuario}, nombre='{self.nombre}', apellido='{self.apellido}')>"
