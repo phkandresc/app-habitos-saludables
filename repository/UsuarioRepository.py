@@ -46,8 +46,49 @@ class UsuarioRepository:
             print(f"Error obteniendo usuarios: {e}")
             return []
 
-    def actualizar_usuario(self, id_usuario: int, usuario_data: dict) -> Optional[Usuario]:
-        """Actualizar usuario"""
+
+
+    def actualizar_usuario(self, id_usuario: int, datos: dict) -> Optional[Usuario]:
+        """Actualiza tanto el usuario como su perfil"""
+        try:
+            from model.PerfilUsuario import PerfilUsuario
+
+            with self.db.get_session() as session:
+                usuario = session.query(Usuario).filter(Usuario.id_usuario == id_usuario).first()
+                if not usuario:
+                    print("Usuario no encontrado")
+                    return None
+
+                # Actualizar campos del usuario
+                for key, value in datos.get('usuario', {}).items():
+                    if hasattr(usuario, key):
+                        setattr(usuario, key, value)
+
+                # Actualizar o crear el perfil
+                perfil_data = datos.get('perfil', {})
+                if perfil_data:
+                    if usuario.perfil:
+                        perfil = usuario.perfil
+                    else:
+                        perfil = PerfilUsuario()
+                        usuario.perfil = perfil
+                        session.add(perfil)
+
+                    for key, value in perfil_data.items():
+                        if hasattr(perfil, key):
+                            setattr(perfil, key, value)
+
+                session.commit()
+                session.expunge(usuario)
+                return usuario
+
+        except SQLAlchemyError as e:
+            print(f"Error actualizando usuario: {e}")
+            return None
+
+
+    """def actualizar_usuario(self, id_usuario: int, usuario_data: dict) -> Optional[Usuario]:
+        #Actualizar usuario
         try:
             with self.db.get_session() as session:
                 usuario = session.query(Usuario).filter(
@@ -62,7 +103,7 @@ class UsuarioRepository:
                 return None
         except SQLAlchemyError as e:
             print(f"Error actualizando usuario: {e}")
-            return None
+            return None"""
 
     def eliminar_usuario(self, id_usuario: int) -> bool:
         """Eliminar usuario"""

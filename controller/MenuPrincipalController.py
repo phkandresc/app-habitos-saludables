@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QMessageBox, QMainWindow
 from controller.HabitosController import HabitosController
 from controller.ComunidadController import ComunidadController
 from controller.LogrosController import LogrosController
+from controller.PerfilUsuarioController import PerfilUsuarioController
 from view.windows.VentanaMenuPrincipal import Ui_MainWindow
 from model.Usuario import Usuario
 
@@ -28,6 +29,7 @@ class MenuPrincipalController:
         self.ui.action_item_Habitos_Saludables.triggered.connect(self.habitos)
 
         self.ui.action_Icono_Logros.triggered.connect(lambda: self.abrir_ventana('logros'))
+        self.ui.action_Icono_Perfil_Usuario.triggered.connect(self.perfil)
 
         # Aquí puedes añadir más conexiones para nuevos botones/acciones
         # Ejemplo:
@@ -44,6 +46,18 @@ class MenuPrincipalController:
         except Exception as e:
             self.mostrar_error(f"Error al abrir ventana de hábitos: {str(e)}")
             print(f"Error en habitos(): {e}")
+
+    def perfil(self):
+        """Abrir ventana de perfil de usuario"""
+        try:
+            controlador = PerfilUsuarioController(self.usuario_autenticado.id_usuario)
+            controlador.ventana_cerrada.connect(self.mostrar_vista)
+            self.controladores['perfil'] = controlador
+            self.vista.hide()
+            controlador.vista.show()
+        except Exception as e:
+            self.mostrar_error(f"Error al abrir ventana de perfil: {str(e)}")
+            print(f"Error en perfil(): {e}")
 
     def abrir_ventana(self, tipo):
         """Abre una ventana secundaria según el tipo"""

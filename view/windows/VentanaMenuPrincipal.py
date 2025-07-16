@@ -165,7 +165,7 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1032, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1032, 24))
         self.menubar.setObjectName("menubar")
         self.menuMenu = QtWidgets.QMenu(parent=self.menubar)
         self.menuMenu.setObjectName("menuMenu")
@@ -238,7 +238,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "SISTEMA HABITOS SALUDABLES :: Menú Principal"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Habitos Saludables"))
         self.lbl_titulo_principal.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\"> Hábitos Saludables</span></p></body></html>"))
         self.label_2.setText(_translate("MainWindow", "Infromación de inicio rápido"))
         self.label_3.setText(_translate("MainWindow", "Nivel:"))
