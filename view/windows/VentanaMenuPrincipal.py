@@ -9,11 +9,11 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1032, 773)
-        MainWindow.setStyleSheet("QMainWindow {\n"
+class Ui_ventanaMenuPrincipal(object):
+    def setupUi(self, ventanaMenuPrincipal):
+        ventanaMenuPrincipal.setObjectName("ventanaMenuPrincipal")
+        ventanaMenuPrincipal.resize(1095, 676)
+        ventanaMenuPrincipal.setStyleSheet("QMainWindow {\n"
 "    background-color: rgb(255, 255, 255)\n"
 "}\n"
 "\n"
@@ -61,171 +61,417 @@ class Ui_MainWindow(object):
 "    border: 2px solid rgb(65, 84, 176);\n"
 "}\n"
 "\n"
+"QCalendarWidget {\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    border-radius: 10px;\n"
+"    font-family: Arial;\n"
+"    font-size: 10pt;\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton {\n"
+"    color: #2c3e50;\n"
+"    background-color: #ecf0f1;\n"
+"    font-weight: bold;\n"
+"    border: none;\n"
+"    margin: 5px;\n"
+"    padding: 5px 10px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton:hover {\n"
+"    background-color: #d0d3d4;\n"
+"}\n"
+"\n"
+"QCalendarWidget QMenu {\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #dcdcdc;\n"
+"}\n"
+"\n"
+"QCalendarWidget QSpinBox {\n"
+"    width: 70px;\n"
+"    font-size: 10pt;\n"
+"}\n"
+"\n"
+"QCalendarWidget QWidget#qt_calendar_navigationbar {\n"
+"    background-color: #f7f9fa;\n"
+"    border-bottom: 1px solid #dcdcdc;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView {\n"
+"    selection-background-color: #27ae60;\n"
+"    selection-color: white;\n"
+"    background-color: #ffffff;\n"
+"    gridline-color: #ecf0f1;\n"
+"    outline: 0;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView:enabled {\n"
+"    font-size: 10pt;\n"
+"    color: #2c3e50;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView::item:hover {\n"
+"    background-color: rgb(116, 162, 255);\n"
+"    color: black;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView::item:selected {\n"
+"    background-color: rgb(80, 127, 255);\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView::item:disabled {\n"
+"    color: #bdc3c7;\n"
+"}\n"
+"\n"
+"QCalendarWidget QMenu {\n"
+"    background-color: #ffffff;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    color: #2c3e50;\n"
+"}\n"
+"\n"
+"QCalendarWidget QMenu::item {\n"
+"    padding: 5px 15px;\n"
+"    background-color: transparent;\n"
+"    color: #2c3e50;\n"
+"}\n"
+"\n"
+"QCalendarWidget QMenu::item:selected {\n"
+"    background-color: #d0d3d4;\n"
+"    color: #2c3e50;\n"
+"}\n"
+"\n"
+"QProgressBar {\n"
+"    border: 1px solid #aaa;\n"
+"    border-radius: 10px;\n"
+"    background-color: #f0f0f0;\n"
+"    height: 20px;\n"
+"    text-align: center;\n"
+"    color: #333;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: qlineargradient(\n"
+"        x1: 0, y1: 0, x2: 1, y2: 0,\n"
+"        stop: 0 #6be585,\n"
+"        stop: 1 #4ecdc4\n"
+"    );\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
 "")
-        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
+        self.centralwidget = QtWidgets.QWidget(parent=ventanaMenuPrincipal)
         self.centralwidget.setObjectName("centralwidget")
-        self.lbl_titulo_principal = QtWidgets.QLabel(parent=self.centralwidget)
-        self.lbl_titulo_principal.setGeometry(QtCore.QRect(230, 10, 391, 61))
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setContentsMargins(-1, 10, -1, 10)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setSpacing(15)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.lblHolaUsuario = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
-        font.setPointSize(24)
-        self.lbl_titulo_principal.setFont(font)
-        self.lbl_titulo_principal.setObjectName("lbl_titulo_principal")
-        self.label = QtWidgets.QLabel(parent=self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 70, 461, 611))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("iconos/fondoPrincipalV2.jpg"))
-        self.label.setObjectName("label")
-        self.gridLayoutWidget = QtWidgets.QWidget(parent=self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(490, 170, 391, 271))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)
-        self.label_2 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
+        font.setPointSize(20)
+        font.setBold(True)
+        self.lblHolaUsuario.setFont(font)
+        self.lblHolaUsuario.setObjectName("lblHolaUsuario")
+        self.verticalLayout.addWidget(self.lblHolaUsuario)
+        self.lblConsejo = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
-        font.setPointSize(13)
-        self.label_2.setFont(font)
-        self.label_2.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        font.setPointSize(14)
+        self.lblConsejo.setFont(font)
+        self.lblConsejo.setObjectName("lblConsejo")
+        self.verticalLayout.addWidget(self.lblConsejo)
+        self.verticalLayout_4.addLayout(self.verticalLayout)
+        self.listHabitosDelDiaEnCurso = QtWidgets.QListWidget(parent=self.centralwidget)
+        self.listHabitosDelDiaEnCurso.setStyleSheet("QListWidget {\n"
+"    border: 2px solid #555;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    background-color: white; /* opcional */\n"
+"}\n"
+"")
+        self.listHabitosDelDiaEnCurso.setObjectName("listHabitosDelDiaEnCurso")
+        self.verticalLayout_4.addWidget(self.listHabitosDelDiaEnCurso)
+        self.horizontalLayout_4.addLayout(self.verticalLayout_4)
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_7.setSpacing(20)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_2 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_2.setMinimumSize(QtCore.QSize(40, 40))
+        self.label_2.setMaximumSize(QtCore.QSize(40, 40))
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("iconos/sube nivel.png"))
+        self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 1, 1, 1, 2)
-        self.label_3 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
+        self.horizontalLayout.addWidget(self.label_2)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_4 = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 4, 1, 1, 1)
-        self.label_4 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setBold(True)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 5, 1, 1, 1)
-        self.txt_desafios_Pendientes = QtWidgets.QLineEdit(parent=self.gridLayoutWidget)
+        self.verticalLayout_2.addWidget(self.label_4)
+        self.lblNivel = QtWidgets.QLabel(parent=self.centralwidget)
+        self.lblNivel.setObjectName("lblNivel")
+        self.verticalLayout_2.addWidget(self.lblNivel)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.horizontalLayout_3.addLayout(self.horizontalLayout)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.label_14 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_14.setMinimumSize(QtCore.QSize(40, 40))
+        self.label_14.setMaximumSize(QtCore.QSize(40, 40))
+        self.label_14.setText("")
+        self.label_14.setPixmap(QtGui.QPixmap("iconos/puntos.png"))
+        self.label_14.setScaledContents(True)
+        self.label_14.setObjectName("label_14")
+        self.horizontalLayout_2.addWidget(self.label_14)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.label_5 = QtWidgets.QLabel(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.txt_desafios_Pendientes.setFont(font)
-        self.txt_desafios_Pendientes.setObjectName("txt_desafios_Pendientes")
-        self.gridLayout.addWidget(self.txt_desafios_Pendientes, 7, 2, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout.addItem(spacerItem1, 4, 3, 1, 1)
-        self.label_5 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setBold(True)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 6, 1, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout.addItem(spacerItem2, 5, 0, 1, 1)
-        self.label_6 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
+        self.verticalLayout_3.addWidget(self.label_5)
+        self.lblPuntos = QtWidgets.QLabel(parent=self.centralwidget)
+        self.lblPuntos.setObjectName("lblPuntos")
+        self.verticalLayout_3.addWidget(self.lblPuntos)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_3)
+        self.horizontalLayout_3.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_3)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setSpacing(40)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.groupBox_2 = QtWidgets.QGroupBox(parent=self.centralwidget)
+        self.groupBox_2.setMaximumSize(QtCore.QSize(421, 345))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.groupBox_2.setFont(font)
+        self.groupBox_2.setStyleSheet("QGroupBox {\n"
+"    border: 2px solid #555;  /* Cambia el color si quieres */\n"
+"    border-radius: 5px;\n"
+"    margin-top: 6px;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    left: 10px;\n"
+"    padding: 0 5px;\n"
+"}\n"
+"\n"
+"")
+        self.groupBox_2.setObjectName("groupBox_2")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.calendarWidget = QtWidgets.QCalendarWidget(parent=self.groupBox_2)
+        self.calendarWidget.setAutoFillBackground(False)
+        self.calendarWidget.setStyleSheet("QCalendarWidget {\n"
+"    background-color: #ffffff;\n"
+"    border: none;\n"
+"    font-family: \"Segoe UI\", \"Helvetica\", sans-serif;\n"
+"    color: #000;\n"
+"}\n"
+"\n"
+"/* Botones (← → y nombre del mes) */\n"
+"QCalendarWidget QToolButton {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    color: #000000;\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"/* Hover de botones */\n"
+"QCalendarWidget QToolButton:hover {\n"
+"    background-color: #f0f0f0;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"/* Menú desplegable (si lo usas) */\n"
+"QCalendarWidget QMenu {\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"    border: 1px solid #ccc;\n"
+"}\n"
+"\n"
+"/* Caja de número del año */\n"
+"QCalendarWidget QSpinBox {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    color: #000;\n"
+"}\n"
+"\n"
+"/* Celdas del calendario */\n"
+"QCalendarWidget QAbstractItemView {\n"
+"    background-color: #ffffff;\n"
+"    selection-background-color: #000000;\n"
+"    selection-color: #ffffff;\n"
+"    gridline-color: #e0e0e0;\n"
+"    font-size: 12px;\n"
+"}\n"
+"\n"
+"/* Colores de los días */\n"
+"QCalendarWidget QAbstractItemView:enabled {\n"
+"    color: #000000;\n"
+"}\n"
+"QCalendarWidget QAbstractItemView:disabled {\n"
+"    color: #c0c0c0;\n"
+"}\n"
+"\n"
+"/* Celdas del calendario */\n"
+"QCalendarWidget QAbstractItemView {\n"
+"    background-color: #ffffff;\n"
+"    selection-background-color: #000000;  /* fondo de día seleccionado */\n"
+"    selection-color: #ffffff;             /* color del número */\n"
+"    border: none;\n"
+"    outline: none;\n"
+"    font-size: 12px;\n"
+"    gridline-color: #e0e0e0;\n"
+"}\n"
+"\n"
+"/* Estilo en forma de círculo u óvalo */\n"
+"QCalendarWidget QAbstractItemView::item:selected {\n"
+"    background-color: #000000;\n"
+"    color: #ffffff;\n"
+"    border-radius: 12px; /* ¡Esto lo hace circular! */\n"
+"    margin: 2px;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"")
+        self.calendarWidget.setGridVisible(False)
+        self.calendarWidget.setObjectName("calendarWidget")
+        self.verticalLayout_5.addWidget(self.calendarWidget)
+        self.verticalLayout_6.addWidget(self.groupBox_2)
+        self.groupBox = QtWidgets.QGroupBox(parent=self.centralwidget)
+        self.groupBox.setMinimumSize(QtCore.QSize(0, 141))
+        self.groupBox.setMaximumSize(QtCore.QSize(421, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.groupBox.setFont(font)
+        self.groupBox.setStyleSheet("QGroupBox {\n"
+"    border: 2px solid #555;  /* Cambia el color si quieres */\n"
+"    border-radius: 5px;\n"
+"    margin-top: 6px;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    left: 10px;\n"
+"    padding: 0 5px;\n"
+"}\n"
+"")
+        self.groupBox.setObjectName("groupBox")
+        self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
+        self.gridLayout.setObjectName("gridLayout")
+        self.pbProgresoNivel = QtWidgets.QProgressBar(parent=self.groupBox)
+        self.pbProgresoNivel.setProperty("value", 24)
+        self.pbProgresoNivel.setObjectName("pbProgresoNivel")
+        self.gridLayout.addWidget(self.pbProgresoNivel, 2, 0, 1, 1)
+        self.lblDescripcion = QtWidgets.QLabel(parent=self.groupBox)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_6.setFont(font)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 7, 1, 1, 1)
-        self.txt_Ranking = QtWidgets.QLineEdit(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.txt_Ranking.setFont(font)
-        self.txt_Ranking.setObjectName("txt_Ranking")
-        self.gridLayout.addWidget(self.txt_Ranking, 4, 2, 1, 1)
-        self.label_7 = QtWidgets.QLabel(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_7.setFont(font)
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 3, 1, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem3, 8, 1, 1, 1)
-        self.txt_Habitos_Pendientes = QtWidgets.QLineEdit(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.txt_Habitos_Pendientes.setFont(font)
-        self.txt_Habitos_Pendientes.setObjectName("txt_Habitos_Pendientes")
-        self.gridLayout.addWidget(self.txt_Habitos_Pendientes, 6, 2, 1, 1)
-        self.txt_userName = QtWidgets.QLineEdit(parent=self.gridLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.txt_userName.setFont(font)
-        self.txt_userName.setObjectName("txt_userName")
-        self.gridLayout.addWidget(self.txt_userName, 3, 2, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem4, 2, 1, 1, 2)
-        self.progressBar_Habitos = QtWidgets.QProgressBar(parent=self.gridLayoutWidget)
-        self.progressBar_Habitos.setProperty("value", 24)
-        self.progressBar_Habitos.setObjectName("progressBar_Habitos")
-        self.gridLayout.addWidget(self.progressBar_Habitos, 5, 2, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(580, 550, 221, 51))
-        font = QtGui.QFont()
-        font.setFamily("Adwaita Sans")
-        self.pushButton.setFont(font)
-        self.pushButton.setObjectName("pushButton")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1032, 24))
-        self.menubar.setObjectName("menubar")
-        self.menuMenu = QtWidgets.QMenu(parent=self.menubar)
-        self.menuMenu.setObjectName("menuMenu")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        self.toolBar = QtWidgets.QToolBar(parent=MainWindow)
+        self.lblDescripcion.setFont(font)
+        self.lblDescripcion.setObjectName("lblDescripcion")
+        self.gridLayout.addWidget(self.lblDescripcion, 1, 0, 1, 1)
+        self.verticalLayout_6.addWidget(self.groupBox)
+        self.verticalLayout_7.addLayout(self.verticalLayout_6)
+        self.horizontalLayout_4.addLayout(self.verticalLayout_7)
+        self.gridLayout_2.addLayout(self.horizontalLayout_4, 0, 0, 1, 1)
+        ventanaMenuPrincipal.setCentralWidget(self.centralwidget)
+        self.toolBar = QtWidgets.QToolBar(parent=ventanaMenuPrincipal)
+        self.toolBar.setStyleSheet("QToolBar {\n"
+"    background-color: #ffffff;       /* fondo del toolbar */\n"
+"    spacing: 6px;                    /* espacio entre botones */\n"
+"    padding: 4px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QToolButton {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    padding: 6px 10px;\n"
+"    color: #000000;                  /* color del texto/icono */\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QToolButton:hover {\n"
+"    background-color: #b0b0b0;       /* gris claro al pasar el cursor */\n"
+"    border-radius: 20px;\n"
+"}\n"
+"\n"
+"QToolButton:pressed {\n"
+"    background-color: #c0c0c0;       /* más oscuro al hacer clic */\n"
+"}\n"
+"")
         self.toolBar.setIconSize(QtCore.QSize(50, 50))
         self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
         self.toolBar.setObjectName("toolBar")
-        MainWindow.addToolBar(QtCore.Qt.ToolBarArea.LeftToolBarArea, self.toolBar)
-        self.action_Icono_Habitos_Saludables = QtGui.QAction(parent=MainWindow)
+        ventanaMenuPrincipal.addToolBar(QtCore.Qt.ToolBarArea.LeftToolBarArea, self.toolBar)
+        self.action_Icono_Habitos_Saludables = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.action_Icono_Habitos_Saludables.setCheckable(True)
-        icon = QtGui.QIcon.fromTheme("Habitos_Saludables")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("iconos/estilo-de-vida-saludable.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.action_Icono_Habitos_Saludables.setIcon(icon)
         self.action_Icono_Habitos_Saludables.setObjectName("action_Icono_Habitos_Saludables")
-        self.action_Icono_Logros = QtGui.QAction(parent=MainWindow)
-        icon = QtGui.QIcon.fromTheme("Logros")
-        self.action_Icono_Logros.setIcon(icon)
+        self.action_Icono_Logros = QtGui.QAction(parent=ventanaMenuPrincipal)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("iconos/distintivo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.action_Icono_Logros.setIcon(icon1)
         self.action_Icono_Logros.setObjectName("action_Icono_Logros")
-        self.action_Icono_Ranking = QtGui.QAction(parent=MainWindow)
-        icon = QtGui.QIcon.fromTheme("Ranking")
-        self.action_Icono_Ranking.setIcon(icon)
+        self.action_Icono_Ranking = QtGui.QAction(parent=ventanaMenuPrincipal)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("iconos/clasificacion.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.action_Icono_Ranking.setIcon(icon2)
         self.action_Icono_Ranking.setObjectName("action_Icono_Ranking")
-        self.action_Icono_Comunidad = QtGui.QAction(parent=MainWindow)
-        icon = QtGui.QIcon.fromTheme("Comunidad")
-        self.action_Icono_Comunidad.setIcon(icon)
+        self.action_Icono_Comunidad = QtGui.QAction(parent=ventanaMenuPrincipal)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("iconos/grupo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.action_Icono_Comunidad.setIcon(icon3)
         self.action_Icono_Comunidad.setObjectName("action_Icono_Comunidad")
-        self.action_Icono_Perfil_Usuario = QtGui.QAction(parent=MainWindow)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("iconos/usuarios.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.action_Icono_Perfil_Usuario.setIcon(icon)
+        self.action_Icono_Perfil_Usuario = QtGui.QAction(parent=ventanaMenuPrincipal)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("iconos/perfil.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.action_Icono_Perfil_Usuario.setIcon(icon4)
         self.action_Icono_Perfil_Usuario.setObjectName("action_Icono_Perfil_Usuario")
-        self.action_Icono_Cerrar_Sesion = QtGui.QAction(parent=MainWindow)
-        icon = QtGui.QIcon.fromTheme("Cerrar_Sesion")
-        self.action_Icono_Cerrar_Sesion.setIcon(icon)
+        self.action_Icono_Cerrar_Sesion = QtGui.QAction(parent=ventanaMenuPrincipal)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("iconos/cerrar-sesion....png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.action_Icono_Cerrar_Sesion.setIcon(icon5)
         self.action_Icono_Cerrar_Sesion.setObjectName("action_Icono_Cerrar_Sesion")
-        self.action_item_Habitos_Saludables = QtGui.QAction(parent=MainWindow)
+        self.action_item_Habitos_Saludables = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.action_item_Habitos_Saludables.setObjectName("action_item_Habitos_Saludables")
-        self.actionLogros = QtGui.QAction(parent=MainWindow)
+        self.actionLogros = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.actionLogros.setObjectName("actionLogros")
-        self.actionRanking = QtGui.QAction(parent=MainWindow)
+        self.actionRanking = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.actionRanking.setObjectName("actionRanking")
-        self.actionDesaf_os = QtGui.QAction(parent=MainWindow)
+        self.actionDesaf_os = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.actionDesaf_os.setObjectName("actionDesaf_os")
-        self.actionComunidad = QtGui.QAction(parent=MainWindow)
+        self.actionComunidad = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.actionComunidad.setObjectName("actionComunidad")
-        self.actionPerfil_Usuario = QtGui.QAction(parent=MainWindow)
+        self.actionPerfil_Usuario = QtGui.QAction(parent=ventanaMenuPrincipal)
         self.actionPerfil_Usuario.setObjectName("actionPerfil_Usuario")
-        self.actionCerrar_Sesion = QtGui.QAction(parent=MainWindow)
+        self.actionCerrar_Sesion = QtGui.QAction(parent=ventanaMenuPrincipal)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("iconos/icons-salir.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.actionCerrar_Sesion.setIcon(icon6)
         self.actionCerrar_Sesion.setObjectName("actionCerrar_Sesion")
-        self.menuMenu.addAction(self.action_item_Habitos_Saludables)
-        self.menuMenu.addAction(self.actionLogros)
-        self.menuMenu.addAction(self.actionRanking)
-        self.menuMenu.addAction(self.actionDesaf_os)
-        self.menuMenu.addAction(self.actionComunidad)
-        self.menuMenu.addAction(self.actionPerfil_Usuario)
-        self.menuMenu.addAction(self.actionCerrar_Sesion)
-        self.menubar.addAction(self.menuMenu.menuAction())
         self.toolBar.addAction(self.action_Icono_Habitos_Saludables)
         self.toolBar.addAction(self.action_Icono_Logros)
         self.toolBar.addAction(self.action_Icono_Ranking)
@@ -233,33 +479,33 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.action_Icono_Perfil_Usuario)
         self.toolBar.addAction(self.action_Icono_Cerrar_Sesion)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(ventanaMenuPrincipal)
+        QtCore.QMetaObject.connectSlotsByName(ventanaMenuPrincipal)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, ventanaMenuPrincipal):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Habitos Saludables"))
-        self.lbl_titulo_principal.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\"> Hábitos Saludables</span></p></body></html>"))
-        self.label_2.setText(_translate("MainWindow", "Infromación de inicio rápido"))
-        self.label_3.setText(_translate("MainWindow", "Nivel:"))
-        self.label_4.setText(_translate("MainWindow", "Avance de habitos:"))
-        self.label_5.setText(_translate("MainWindow", "Habitos Pendientes:"))
-        self.label_6.setText(_translate("MainWindow", "Desafios Pendientes"))
-        self.label_7.setText(_translate("MainWindow", "Usuario:"))
-        self.pushButton.setText(_translate("MainWindow", "Crear un nuevo habito"))
-        self.menuMenu.setTitle(_translate("MainWindow", "Menu"))
-        self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
-        self.action_Icono_Habitos_Saludables.setText(_translate("MainWindow", "Habitos Saludables"))
-        self.action_Icono_Logros.setText(_translate("MainWindow", "Logros"))
-        self.action_Icono_Ranking.setText(_translate("MainWindow", "Ranking"))
-        self.action_Icono_Comunidad.setText(_translate("MainWindow", "Comunidad"))
-        self.action_Icono_Perfil_Usuario.setText(_translate("MainWindow", "Perfil"))
-        self.action_Icono_Perfil_Usuario.setToolTip(_translate("MainWindow", "Perfil_Usuario"))
-        self.action_Icono_Cerrar_Sesion.setText(_translate("MainWindow", "Cerrar Sesion"))
-        self.action_item_Habitos_Saludables.setText(_translate("MainWindow", "Habitos_Saludables"))
-        self.actionLogros.setText(_translate("MainWindow", "Logros"))
-        self.actionRanking.setText(_translate("MainWindow", "Ranking"))
-        self.actionDesaf_os.setText(_translate("MainWindow", "Desafíos"))
-        self.actionComunidad.setText(_translate("MainWindow", "Comunidad"))
-        self.actionPerfil_Usuario.setText(_translate("MainWindow", "Perfil_Usuario"))
-        self.actionCerrar_Sesion.setText(_translate("MainWindow", "Cerrar_Sesion"))
+        ventanaMenuPrincipal.setWindowTitle(_translate("ventanaMenuPrincipal", "SISTEMA HABITOS SALUDABLES"))
+        self.lblHolaUsuario.setText(_translate("ventanaMenuPrincipal", "¡Hola, @usuario!"))
+        self.lblConsejo.setText(_translate("ventanaMenuPrincipal", "texto para consejo"))
+        self.label_4.setText(_translate("ventanaMenuPrincipal", "Tu nivel:"))
+        self.lblNivel.setText(_translate("ventanaMenuPrincipal", "Nivel"))
+        self.label_5.setText(_translate("ventanaMenuPrincipal", "Tus puntos:"))
+        self.lblPuntos.setText(_translate("ventanaMenuPrincipal", "Puntos"))
+        self.groupBox_2.setTitle(_translate("ventanaMenuPrincipal", "Calendario"))
+        self.groupBox.setTitle(_translate("ventanaMenuPrincipal", "Progreso de Nivel"))
+        self.lblDescripcion.setText(_translate("ventanaMenuPrincipal", "aqui va descripcion"))
+        self.toolBar.setWindowTitle(_translate("ventanaMenuPrincipal", "toolBar"))
+        self.action_Icono_Habitos_Saludables.setText(_translate("ventanaMenuPrincipal", "Habitos Saludables"))
+        self.action_Icono_Logros.setText(_translate("ventanaMenuPrincipal", "Logros"))
+        self.action_Icono_Ranking.setText(_translate("ventanaMenuPrincipal", "Ranking"))
+        self.action_Icono_Comunidad.setText(_translate("ventanaMenuPrincipal", "Comunidad"))
+        self.action_Icono_Perfil_Usuario.setText(_translate("ventanaMenuPrincipal", "Perfil"))
+        self.action_Icono_Perfil_Usuario.setToolTip(_translate("ventanaMenuPrincipal", "Perfil_Usuario"))
+        self.action_Icono_Cerrar_Sesion.setText(_translate("ventanaMenuPrincipal", "Cerrar Sesion"))
+        self.action_item_Habitos_Saludables.setText(_translate("ventanaMenuPrincipal", "Habitos_Saludables"))
+        self.actionLogros.setText(_translate("ventanaMenuPrincipal", "Logros"))
+        self.actionRanking.setText(_translate("ventanaMenuPrincipal", "Ranking"))
+        self.actionDesaf_os.setText(_translate("ventanaMenuPrincipal", "Desafíos"))
+        self.actionComunidad.setText(_translate("ventanaMenuPrincipal", "Comunidad"))
+        self.actionPerfil_Usuario.setText(_translate("ventanaMenuPrincipal", "Perfil_Usuario"))
+        self.actionCerrar_Sesion.setText(_translate("ventanaMenuPrincipal", "Cerrar_Sesion"))

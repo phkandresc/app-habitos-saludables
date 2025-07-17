@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ventanaMenuPrincipal</class>
+ <widget class="QMainWindow" name="ventanaMenuPrincipal">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1032</width>
-    <height>773</height>
+    <width>1095</width>
+    <height>676</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Habitos Saludables</string>
+   <string>SISTEMA HABITOS SALUDABLES</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
@@ -62,287 +62,506 @@ QPushButton:clicked{
 	border: 2px solid rgb(65, 84, 176);
 }
 
+QCalendarWidget {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    font-family: Arial;
+    font-size: 10pt;
+}
+
+QCalendarWidget QToolButton {
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    font-weight: bold;
+    border: none;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #d0d3d4;
+}
+
+QCalendarWidget QMenu {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+}
+
+QCalendarWidget QSpinBox {
+    width: 70px;
+    font-size: 10pt;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #f7f9fa;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+QCalendarWidget QAbstractItemView {
+    selection-background-color: #27ae60;
+    selection-color: white;
+    background-color: #ffffff;
+    gridline-color: #ecf0f1;
+    outline: 0;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+    font-size: 10pt;
+    color: #2c3e50;
+}
+
+QCalendarWidget QAbstractItemView::item:hover {
+    background-color: rgb(116, 162, 255);
+    color: black;
+}
+
+QCalendarWidget QAbstractItemView::item:selected {
+    background-color: rgb(80, 127, 255);
+    color: white;
+}
+
+QCalendarWidget QAbstractItemView::item:disabled {
+    color: #bdc3c7;
+}
+
+QCalendarWidget QMenu {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    color: #2c3e50;
+}
+
+QCalendarWidget QMenu::item {
+    padding: 5px 15px;
+    background-color: transparent;
+    color: #2c3e50;
+}
+
+QCalendarWidget QMenu::item:selected {
+    background-color: #d0d3d4;
+    color: #2c3e50;
+}
+
+QProgressBar {
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    height: 20px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+}
+
+QProgressBar::chunk {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 #6be585,
+        stop: 1 #4ecdc4
+    );
+    border-radius: 10px;
+}
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="lbl_titulo_principal">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>10</y>
-      <width>391</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>24</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt; Hábitos Saludables&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>70</y>
-      <width>461</width>
-      <height>611</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>iconos/fondoPrincipalV2.jpg</pixmap>
-    </property>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>170</y>
-      <width>391</width>
-      <height>271</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="1" column="1" colspan="2">
-      <widget class="QLabel" name="label_2">
-       <property name="font">
-        <font>
-         <pointsize>13</pointsize>
-        </font>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
-       </property>
-       <property name="text">
-        <string>Infromación de inicio rápido</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLabel" name="label_3">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Nivel:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Avance de habitos:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2">
-      <widget class="QLineEdit" name="txt_desafios_Pendientes">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="3">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLabel" name="label_5">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Habitos Pendientes:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="7" column="1">
-      <widget class="QLabel" name="label_6">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Desafios Pendientes</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLineEdit" name="txt_Ranking">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_7">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Usuario:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="6" column="2">
-      <widget class="QLineEdit" name="txt_Habitos_Pendientes">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="txt_userName">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" colspan="2">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="5" column="2">
-      <widget class="QProgressBar" name="progressBar_Habitos">
-       <property name="value">
-        <number>24</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>550</y>
-      <width>221</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Adwaita Sans</family>
-     </font>
-    </property>
-    <property name="text">
-     <string>Crear un nuevo habito</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>15</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="lblHolaUsuario">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>¡Hola, @usuario!</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblConsejo">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>texto para consejo</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listHabitosDelDiaEnCurso">
+          <property name="styleSheet">
+           <string notr="true">QListWidget {
+    border: 2px solid #555;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: white; /* opcional */
+}
+</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <property name="spacing">
+         <number>20</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap>../../iconos/sube nivel.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QLabel" name="label_4">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Tu nivel:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lblNivel">
+                <property name="text">
+                 <string>Nivel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap>../../iconos/puntos.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_5">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Tus puntos:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lblPuntos">
+                <property name="text">
+                 <string>Puntos</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="spacing">
+           <number>40</number>
+          </property>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="maximumSize">
+             <size>
+              <width>421</width>
+              <height>345</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QGroupBox {
+    border: 2px solid #555;  /* Cambia el color si quieres */
+    border-radius: 5px;
+    margin-top: 6px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px;
+}
+
+</string>
+            </property>
+            <property name="title">
+             <string>Calendario</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QCalendarWidget" name="calendarWidget">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QCalendarWidget {
+    background-color: #ffffff;
+    border: none;
+    font-family: &quot;Segoe UI&quot;, &quot;Helvetica&quot;, sans-serif;
+    color: #000;
+}
+
+/* Botones (← → y nombre del mes) */
+QCalendarWidget QToolButton {
+    background-color: transparent;
+    border: none;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+/* Hover de botones */
+QCalendarWidget QToolButton:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Menú desplegable (si lo usas) */
+QCalendarWidget QMenu {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+/* Caja de número del año */
+QCalendarWidget QSpinBox {
+    background-color: transparent;
+    border: none;
+    color: #000;
+}
+
+/* Celdas del calendario */
+QCalendarWidget QAbstractItemView {
+    background-color: #ffffff;
+    selection-background-color: #000000;
+    selection-color: #ffffff;
+    gridline-color: #e0e0e0;
+    font-size: 12px;
+}
+
+/* Colores de los días */
+QCalendarWidget QAbstractItemView:enabled {
+    color: #000000;
+}
+QCalendarWidget QAbstractItemView:disabled {
+    color: #c0c0c0;
+}
+
+/* Celdas del calendario */
+QCalendarWidget QAbstractItemView {
+    background-color: #ffffff;
+    selection-background-color: #000000;  /* fondo de día seleccionado */
+    selection-color: #ffffff;             /* color del número */
+    border: none;
+    outline: none;
+    font-size: 12px;
+    gridline-color: #e0e0e0;
+}
+
+/* Estilo en forma de círculo u óvalo */
+QCalendarWidget QAbstractItemView::item:selected {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 12px; /* ¡Esto lo hace circular! */
+    margin: 2px;
+}
+
+
+
+</string>
+               </property>
+               <property name="gridVisible">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>141</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>421</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QGroupBox {
+    border: 2px solid #555;  /* Cambia el color si quieres */
+    border-radius: 5px;
+    margin-top: 6px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px;
+}
+</string>
+            </property>
+            <property name="title">
+             <string>Progreso de Nivel</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="2" column="0">
+              <widget class="QProgressBar" name="pbProgresoNivel">
+               <property name="value">
+                <number>24</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lblDescripcion">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>aqui va descripcion</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1032</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuMenu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-    <addaction name="action_item_Habitos_Saludables"/>
-    <addaction name="actionLogros"/>
-    <addaction name="actionRanking"/>
-    <addaction name="actionDesaf_os"/>
-    <addaction name="actionComunidad"/>
-    <addaction name="actionPerfil_Usuario"/>
-    <addaction name="actionCerrar_Sesion"/>
-   </widget>
-   <addaction name="menuMenu"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolBar {
+    background-color: #ffffff;       /* fondo del toolbar */
+    spacing: 6px;                    /* espacio entre botones */
+    padding: 4px;
+    border: none;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: none;
+    padding: 6px 10px;
+    color: #000000;                  /* color del texto/icono */
+    font-weight: bold;
+}
+
+QToolButton:hover {
+    background-color: #b0b0b0;       /* gris claro al pasar el cursor */
+    border-radius: 20px;
+}
+
+QToolButton:pressed {
+    background-color: #c0c0c0;       /* más oscuro al hacer clic */
+}
+</string>
    </property>
    <property name="iconSize">
     <size>
@@ -371,8 +590,8 @@ QPushButton:clicked{
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="Habitos_Saludables">
-     <normaloff>iconos/Habitos_Salud.png</normaloff>iconos/Habitos_Salud.png</iconset>
+    <iconset>
+     <normaloff>../../iconos/estilo-de-vida-saludable.png</normaloff>../../iconos/estilo-de-vida-saludable.png</iconset>
    </property>
    <property name="text">
     <string>Habitos Saludables</string>
@@ -380,8 +599,8 @@ QPushButton:clicked{
   </action>
   <action name="action_Icono_Logros">
    <property name="icon">
-    <iconset theme="Logros">
-     <normaloff>iconos/logros-hábitos.png</normaloff>iconos/logros-hábitos.png</iconset>
+    <iconset>
+     <normaloff>../../iconos/distintivo.png</normaloff>../../iconos/distintivo.png</iconset>
    </property>
    <property name="text">
     <string>Logros</string>
@@ -389,8 +608,8 @@ QPushButton:clicked{
   </action>
   <action name="action_Icono_Ranking">
    <property name="icon">
-    <iconset theme="Ranking">
-     <normaloff>iconos/icons8-goals.png</normaloff>iconos/icons8-goals.png</iconset>
+    <iconset>
+     <normaloff>../../iconos/clasificacion.png</normaloff>../../iconos/clasificacion.png</iconset>
    </property>
    <property name="text">
     <string>Ranking</string>
@@ -398,8 +617,8 @@ QPushButton:clicked{
   </action>
   <action name="action_Icono_Comunidad">
    <property name="icon">
-    <iconset theme="Comunidad">
-     <normaloff>iconos/icons8-comunidad.png</normaloff>iconos/icons8-comunidad.png</iconset>
+    <iconset>
+     <normaloff>../../iconos/grupo.png</normaloff>../../iconos/grupo.png</iconset>
    </property>
    <property name="text">
     <string>Comunidad</string>
@@ -408,7 +627,7 @@ QPushButton:clicked{
   <action name="action_Icono_Perfil_Usuario">
    <property name="icon">
     <iconset>
-     <normaloff>iconos/usuarios.png</normaloff>iconos/usuarios.png</iconset>
+     <normaloff>../../iconos/perfil.png</normaloff>../../iconos/perfil.png</iconset>
    </property>
    <property name="text">
     <string>Perfil</string>
@@ -419,8 +638,8 @@ QPushButton:clicked{
   </action>
   <action name="action_Icono_Cerrar_Sesion">
    <property name="icon">
-    <iconset theme="Cerrar_Sesion">
-     <normaloff>iconos/icons-salir.png</normaloff>iconos/icons-salir.png</iconset>
+    <iconset>
+     <normaloff>../../iconos/cerrar-sesion....png</normaloff>../../iconos/cerrar-sesion....png</iconset>
    </property>
    <property name="text">
     <string>Cerrar Sesion</string>
@@ -457,6 +676,10 @@ QPushButton:clicked{
    </property>
   </action>
   <action name="actionCerrar_Sesion">
+   <property name="icon">
+    <iconset>
+     <normaloff>../iconos/icons-salir.png</normaloff>../iconos/icons-salir.png</iconset>
+   </property>
    <property name="text">
     <string>Cerrar_Sesion</string>
    </property>
