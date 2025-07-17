@@ -18,50 +18,6 @@
 	background-color: rgb(255, 255, 255)
 }
 
-QPushButton#btnRegistrarse{
-	border: none;
-	background-color: transparent;
-	color: black;
-	text-align: center; 
-	padding: 0px; 
-}
-
-QPushButton#btnRegistrarse:hover {
-            text-decoration: underline; /* Optional: Add underline on hover */
-}
-
-QPushButton#btnRegistrarse:pressed {
-            color: gray; /* Optional: Change color on click */
-}
-
-QCheckBox {
-	color:gray;
-}
-QPushButton{
-	background-color: rgb(80, 99, 191);
-	color: rgb(255, 255, 255);
-	border: 2px solid rgb(80, 99, 191);
-	border-radius: 5px;
-	padding: 6px;
-	font-family: &quot;Adwaita Sans&quot;; /* Establece la fuente */
-     /* Establece el tamaño de la fuente */
-}
-
-QLineEdit{
-	border: none;
-	border-bottom: 2px solid rgb(60, 60, 60);
-}
-
-QLineEdit:focus{
-	border-bottom: 2px solid rgb(103, 129, 255);
-}
-
-QPushButton:hover,
-QPushButton:clicked{
-	background-color: rgb(65, 84, 176);
-	border: 2px solid rgb(65, 84, 176);
-}
-
 QCalendarWidget {
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
@@ -215,7 +171,7 @@ QProgressBar::chunk {
     border: 2px solid #555;
     border-radius: 5px;
     padding: 5px;
-    background-color: white; /* opcional */
+	color: black;
 }
 </string>
           </property>

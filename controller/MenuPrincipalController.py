@@ -7,11 +7,14 @@ from controller.HabitosController import HabitosController
 from controller.ComunidadController import ComunidadController
 from controller.LogrosController import LogrosController
 from controller.PerfilUsuarioController import PerfilUsuarioController
+from controller.RankingController import RankingController
 from view.windows.VentanaMenuPrincipal import Ui_ventanaMenuPrincipal
 from view.widgets.HabitoWidget import HabitoWidget
 from repository.HabitosRepository import HabitosRepository
 from repository.CategoriaRepository import CategoriasRepository
 from repository.SeguimientoDiarioRepository import SeguimientoDiarioRepository
+from repository.LogroRepository import LogroRepository
+from repository.NivelRepository import NivelRepository
 from model.Usuario import Usuario
 import logging
 
@@ -30,6 +33,8 @@ class MenuPrincipalController(QObject):
         # Repositorios
         self.habitos_repository = HabitosRepository()
         self.categorias_repository = CategoriasRepository()
+        self.logro_repository = LogroRepository()
+        self.nivel_repository = NivelRepository()
 
         # Diccionario para gestionar controladores secundarios
         self.controladores = {}
@@ -47,6 +52,7 @@ class MenuPrincipalController(QObject):
 
         self.ui.action_Icono_Logros.triggered.connect(lambda: self.abrir_ventana('logros'))
         self.ui.action_Icono_Perfil_Usuario.triggered.connect(self.perfil)
+        self.ui.action_Icono_Ranking.triggered.connect(lambda: self.abrir_ventana('ranking'))
 
         # Aquí puedes añadir más conexiones para nuevos botones/acciones
         # Ejemplo:
@@ -92,11 +98,13 @@ class MenuPrincipalController(QObject):
             elif tipo == 'logros':
                 controlador = LogrosController(self.usuario_autenticado.id_usuario)
                 controlador.ventana_cerrada.connect(self.mostrar_vista)
+            elif tipo == 'ranking':
+                controlador = RankingController(self.usuario_autenticado.id_usuario)
+                controlador.ventana_cerrada.connect(self.mostrar_vista)
 
             # Agrega aquí más tipos de ventanas según sea necesario
-            else:
-                self.mostrar_error(f"Tipo de ventana desconocido: {tipo}")
-                return
+            # Ejemplo:
+            # self.ui.nuevo_boton.clicked.connect(lambda: self.abrir_ventana('nueva_ventana'))
 
             if controlador and hasattr(controlador, 'vista'):
                 self.controladores[tipo] = controlador
@@ -356,12 +364,131 @@ class MenuPrincipalController(QObject):
 
             self.ui.lblHolaUsuario.setText(f"¡Hola, @{nombre_usuario}!")
 
+            # Cargar información del nivel del usuario
+            self._cargar_informacion_nivel()
+
             logger.info(f"Interfaz configurada para usuario: {nombre_usuario}")
 
         except Exception as e:
             logger.error(f"Error configurando interfaz de usuario: {e}")
             # Usar un valor por defecto en caso de error
             self.ui.lblHolaUsuario.setText("¡Hola, @Usuario!")
+            self._mostrar_informacion_nivel_por_defecto()
+
+    def _cargar_informacion_nivel(self):
+        """Carga y muestra la información del nivel del usuario"""
+        try:
+            # Obtener puntos totales del usuario
+            puntos_totales = self.logro_repository.obtener_puntos_por_id_usuario(
+                self.usuario_autenticado.id_usuario
+            )
+
+            # Actualizar nivel del usuario basado en sus puntos
+            self.nivel_repository.actualizar_nivel_usuario_por_puntos(
+                self.usuario_autenticado.id_usuario, puntos_totales
+            )
+
+            # Obtener nivel actual del usuario
+            nivel_actual = self.nivel_repository.obtener_nivel_usuario(
+                self.usuario_autenticado.id_usuario
+            )
+
+            # Obtener todos los niveles para calcular el próximo
+            todos_los_niveles = self.nivel_repository.obtener_todos_niveles()
+
+            # Actualizar la interfaz
+            self._actualizar_etiquetas_nivel(puntos_totales, nivel_actual, todos_los_niveles)
+            self._actualizar_barra_progreso_nivel(puntos_totales, nivel_actual, todos_los_niveles)
+
+            logger.info(f"Información de nivel cargada: {puntos_totales} puntos, nivel: {nivel_actual.nombre if nivel_actual else 'Sin nivel'}")
+
+        except Exception as e:
+            logger.error(f"Error cargando información del nivel: {e}")
+            self._mostrar_informacion_nivel_por_defecto()
+
+    def _actualizar_etiquetas_nivel(self, puntos_totales: int, nivel_actual, todos_los_niveles):
+        """Actualiza las etiquetas de nivel, puntos y descripción"""
+        try:
+            # Actualizar puntos totales
+            self.ui.lblPuntos.setText(f"{puntos_totales} pts")
+
+            # Actualizar nivel actual
+            if nivel_actual:
+                self.ui.lblNivel.setText(nivel_actual.nombre)
+            else:
+                self.ui.lblNivel.setText("Sin nivel")
+
+            # Encontrar y mostrar próximo nivel
+            proximo_nivel = self._obtener_proximo_nivel(puntos_totales, todos_los_niveles)
+            if proximo_nivel:
+                puntos_faltantes = proximo_nivel.puntos_requeridos - puntos_totales
+                self.ui.lblDescripcion.setText(
+                    f"Próximo nivel: {proximo_nivel.nombre} ({puntos_faltantes} pts faltantes)"
+                )
+            else:
+                self.ui.lblDescripcion.setText("¡Has alcanzado el nivel máximo!")
+
+        except Exception as e:
+            logger.error(f"Error actualizando etiquetas de nivel: {e}")
+
+    def _actualizar_barra_progreso_nivel(self, puntos_totales: int, nivel_actual, todos_los_niveles):
+        """Actualiza la barra de progreso del nivel"""
+        try:
+            # Encontrar próximo nivel
+            proximo_nivel = self._obtener_proximo_nivel(puntos_totales, todos_los_niveles)
+
+            if proximo_nivel:
+                # Calcular puntos del nivel anterior
+                puntos_nivel_anterior = 0
+                if nivel_actual:
+                    puntos_nivel_anterior = nivel_actual.puntos_requeridos or 0
+
+                # Calcular progreso
+                puntos_en_rango = puntos_totales - puntos_nivel_anterior
+                puntos_rango_total = proximo_nivel.puntos_requeridos - puntos_nivel_anterior
+
+                if puntos_rango_total > 0:
+                    progreso = int((puntos_en_rango / puntos_rango_total) * 100)
+                    progreso = max(0, min(100, progreso))  # Asegurar que esté entre 0 y 100
+                else:
+                    progreso = 100
+
+                self.ui.pbProgresoNivel.setValue(progreso)
+            else:
+                # Nivel máximo alcanzado
+                self.ui.pbProgresoNivel.setValue(100)
+
+        except Exception as e:
+            logger.error(f"Error actualizando barra de progreso: {e}")
+            self.ui.pbProgresoNivel.setValue(0)
+
+    def _obtener_proximo_nivel(self, puntos_actuales: int, todos_los_niveles):
+        """Obtiene el próximo nivel que puede alcanzar el usuario"""
+        try:
+            # Filtrar niveles que requieren más puntos que los actuales
+            niveles_superiores = [
+                nivel for nivel in todos_los_niveles
+                if nivel.puntos_requeridos and nivel.puntos_requeridos > puntos_actuales
+            ]
+
+            # Ordenar por puntos requeridos y tomar el primero (el más cercano)
+            if niveles_superiores:
+                return min(niveles_superiores, key=lambda n: n.puntos_requeridos)
+
+            return None
+        except Exception as e:
+            logger.error(f"Error obteniendo próximo nivel: {e}")
+            return None
+
+    def _mostrar_informacion_nivel_por_defecto(self):
+        """Muestra información por defecto en caso de error"""
+        try:
+            self.ui.lblPuntos.setText("0 pts")
+            self.ui.lblNivel.setText("Sin nivel")
+            self.ui.lblDescripcion.setText("Completa hábitos para ganar puntos")
+            self.ui.pbProgresoNivel.setValue(0)
+        except Exception as e:
+            logger.error(f"Error mostrando información por defecto: {e}")
 
     def _on_editar_habito(self, habito_id: int):
         """Manejar edición de hábito (renombrado para consistencia)"""
